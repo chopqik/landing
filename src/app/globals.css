@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1F2937;
+}
+
+/* Optional: Dark mode preference if needed later, but sticking to design */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    /* Keeping light mode as default for this fresh food app unless asked otherwise */
+    --foreground: #1F2937;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-jakarta), sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Utilities for Background Patterns */
+.bg-grid-white {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+}
+
+.bg-grid-small-white {
+  background-size: 20px 20px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+}
+
+.bg-dot-white {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+}
