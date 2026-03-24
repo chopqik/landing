@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import * as React from "react";
 import { InteractiveHeroText } from "@/components/ui/interactive-hero-text";
+import { APP_LINKS } from "@/constants/links";
 
 const BACKGROUND_IMAGES = [
   "/images/keesha-s-kitchen-eaSIzdS8pv0-unsplash.jpg",
@@ -110,7 +111,7 @@ export function HeroImmersive({
 
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
             <a
-              href="https://forms.gle/5n687Hn2fA8P"
+              href={APP_LINKS.waitList}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-14 px-10 text-lg rounded-full bg-[#F2891C] hover:bg-[#F2891C]/90 text-white shadow-2xl hover:scale-105 items-center justify-center transition-all duration-300 min-w-[180px] font-bold"

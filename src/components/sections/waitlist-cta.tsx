@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { APP_LINKS } from "@/constants/links";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
@@ -37,7 +38,7 @@ export function WaitlistCTA() {
         </p>
 
         <a
-          href="https://forms.gle/5n687Hn2fA8P" // Update with actual form link if different
+          href={APP_LINKS.waitList} // Update with actual form link if different
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex h-16 items-center justify-center px-10 text-lg rounded-full bg-[#F2891C] hover:bg-white hover:text-zinc-900 text-white font-black shadow-2xl hover:scale-105 transition-all duration-300 group"

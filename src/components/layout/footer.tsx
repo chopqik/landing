@@ -13,6 +13,7 @@ import {
   Mail,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { APP_LINKS } from "@/constants/links";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -356,7 +357,7 @@ export function Footer() {
                 {/* Waitlist Link */}
                 <div className="flex justify-center mt-2">
                   <a
-                    href="#" // Note: Provide the Google form link here later
+                    href={APP_LINKS.waitList}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setShowModal(false)}

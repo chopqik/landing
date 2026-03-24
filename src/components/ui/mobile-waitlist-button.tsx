@@ -1,5 +1,6 @@
 "use client";
 
+import { APP_LINKS } from "@/constants/links";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -12,7 +13,7 @@ export function MobileWaitlistButton() {
       className="fixed bottom-6 left-4 right-4 z-100 md:hidden pointer-events-none"
     >
       <a
-        href="https://forms.gle/5n687Hn2fA8P"
+        href={APP_LINKS.waitList}
         target="_blank"
         rel="noopener noreferrer"
         className="pointer-events-auto group relative flex h-14 w-full items-center justify-center gap-3 rounded-full bg-[#F2891C] px-8 text-lg font-bold text-white shadow-2xl shadow-[#F2891C]/30 transition-all hover:bg-orange-600 active:scale-95"
