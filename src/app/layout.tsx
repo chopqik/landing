@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { SplashScreen } from "@/components/ui/splash-screen";
 import { TawkToScript } from "@/components/ui/tawk-to-script";
 import { MobileWaitlistButton } from "@/components/ui/mobile-waitlist-button";
+import Providers from "./Providers";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -134,18 +135,20 @@ export default function RootLayout({
           inter.variable,
         )}
       >
-        <SplashScreen />
-        <Navbar />
-        <main className="flex-1">
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
-          {children}
-        </main>
-        <Footer />
-        <TawkToScript />
-        <MobileWaitlistButton />
+        <Providers>
+          <SplashScreen />
+          <Navbar />
+          <main className="flex-1">
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            {children}
+          </main>
+          <Footer />
+          <TawkToScript />
+          <MobileWaitlistButton />
+        </Providers>
       </body>
     </html>
   );
