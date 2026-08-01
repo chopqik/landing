@@ -6,13 +6,17 @@ import {
   useTransform,
   AnimatePresence,
 } from "framer-motion";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import * as React from "react";
 import { InteractiveHeroText } from "@/components/ui/interactive-hero-text";
 import { APP_LINKS } from "@/constants/links";
 
+// TODO: replace with real product imagery — dashboard screenshots from the
+// demo account and a photograph of a printed table tent on a real table.
+// Stock food photography is what makes this read as a template rather than
+// a product. The dashboard is the differentiator; show it.
 const BACKGROUND_IMAGES = [
   "/images/keesha-s-kitchen-eaSIzdS8pv0-unsplash.jpg",
   "/images/keesha-s-kitchen-jvFeJhQ6Xsk-unsplash.jpg",
@@ -22,7 +26,7 @@ const BACKGROUND_IMAGES = [
 
 export function HeroImmersive({
   onPartnerClick,
-  onVendorClick, // eslint-disable-line @typescript-eslint/no-unused-vars
+  onVendorClick,
   onRiderClick, // eslint-disable-line @typescript-eslint/no-unused-vars
 }: {
   onPartnerClick?: () => void;
@@ -47,6 +51,11 @@ export function HeroImmersive({
     return () => clearInterval(timer);
   }, []);
 
+  // The primary action is for vendors — they are the customer who pays.
+  // The delivery waitlist is secondary and deliberately labelled as a future
+  // service, not a live one.
+  const handlePrimary = onVendorClick ?? onPartnerClick;
+
   return (
     <section
       id="hero"
@@ -69,14 +78,14 @@ export function HeroImmersive({
           >
             <Image
               src={BACKGROUND_IMAGES[currentIndex]}
-              alt="ChopQik background food imagery"
+              alt="A Nigerian restaurant kitchen at work"
               fill
               className="object-cover"
               priority
             />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-black/60 md:bg-black/50 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/70 md:bg-black/60 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 z-10 pointer-events-none" />
       </motion.div>
 
@@ -89,59 +98,59 @@ export function HeroImmersive({
         >
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-sm font-medium text-white mb-8">
             <span className="w-2 h-2 bg-[#F2891C] rounded-full animate-pulse" />
-            The #1 Food Delivery App in Benin City
+            Live in Benin City · More cities loading
           </div>
 
           <div className="mb-8 drop-shadow-2xl">
             <InteractiveHeroText
-              text="From the streets"
+              text="One system."
               className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none block mb-2"
             />
             <InteractiveHeroText
-              text="to your doorstep."
+              text="Total control."
               className="py-2 text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none block text-transparent bg-clip-text bg-gradient-to-r from-[#F2891C] to-orange-300"
             />
           </div>
 
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-200 mb-10 leading-relaxed font-light">
-            Order from local restaurants and street food vendors in Benin
-            City—fast, affordable, and reliable. Expanding to Warri, Asaba, and
-            Port Harcourt.
+          <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-200 mb-4 leading-relaxed font-light">
+            The operating system for restaurants, bars and hotels. Orders,
+            stock, staff, reservations and your daily takings — on one screen,
+            in real time.
+          </p>
+
+          <p className="max-w-2xl mx-auto text-base md:text-lg text-white/70 mb-10 leading-relaxed font-light">
+            One flat monthly fee.{" "}
+            <span className="text-white font-medium">
+              No commission on a single sale, ever.
+            </span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-            <a
-              href={APP_LINKS.waitList}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={handlePrimary}
               className="inline-flex h-14 px-10 text-lg rounded-full bg-[#F2891C] hover:bg-[#F2891C]/90 text-white shadow-2xl hover:scale-105 items-center justify-center transition-all duration-300 min-w-[180px] font-bold"
             >
-              Join Waitlist <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
+              Get ChopQik for your business
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </button>
 
             <Button
+              asChild
               variant="outline"
-              onClick={onPartnerClick}
               className="group h-14 px-8 rounded-full bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40 transition-all font-semibold"
             >
-              <PlayCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-              Become a Partner
+              <a
+                href={APP_LINKS.waitList}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Truck className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                Delivery is coming — join the list
+              </a>
             </Button>
           </div>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      {/* <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70"
-      >
-        <div className="w-px h-16 bg-linear-to-b from-transparent via-white/50 to-transparent mx-auto" />
-        <p className="text-[10px] uppercase tracking-widest mt-2 text-center">
-          Scroll
-        </p>
-      </motion.div> */}
     </section>
   );
 }
