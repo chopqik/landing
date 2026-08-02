@@ -22,42 +22,46 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ChopQik | Fast Food Delivery in Benin City",
+  title: "ChopQik | The Operating System for Nigerian Restaurants",
   description:
-    "Order items, food, and groceries from local vendors in Benin City. Fast delivery, fair prices, and reliable service. Download the app today.",
+    "ChopQik runs the whole floor for restaurants, bars and hotels — orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee, no commission on any sale. Live in Benin City.",
   keywords: [
-    "Food Delivery Benin City",
+    "Restaurant POS Nigeria",
+    "Restaurant management software Nigeria",
     "ChopQik",
-    "Fast Food Benin",
-    "Grocery Delivery Benin City",
-    "Food App Nigeria",
-    "Restaurant Delivery",
-    "Local Food Vendors",
+    "Restaurant inventory software Nigeria",
+    "Bar stock control Nigeria",
+    "Hotel restaurant software Nigeria",
+    "QR code ordering Nigeria",
+    "Table reservation system Nigeria",
+    "Restaurant software Benin City",
   ],
-  authors: [{ name: "ChopQik Team" }],
+  authors: [{ name: "ChopQik LTD" }],
   openGraph: {
-    title: "ChopQik - Fast Food Delivery in Benin City",
+    title: "ChopQik | The Operating System for Nigerian Restaurants",
     description:
-      "Order from local restaurants and street food vendors in Benin City—fast, affordable, and reliable.",
+      "Orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee. No commission on a single sale, ever.",
     url: "https://chopqik.com",
     siteName: "ChopQik",
     locale: "en_NG",
     type: "website",
     images: [
       {
-        url: "/og-image.jpg", // Ensure this image exists in public folder or use a placeholder
+        // TODO: replace with a dashboard screenshot at 1200x630. This image is
+        // what appears on every WhatsApp, LinkedIn and X link preview — for a
+        // software product the dashboard sells better than a logo.
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "ChopQik - Fast Food Delivery",
+        alt: "The ChopQik vendor dashboard",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ChopQik - Fast Food Delivery in Benin City",
+    title: "ChopQik | The Operating System for Nigerian Restaurants",
     description:
-      "Order from local restaurants and street food vendors in Benin City—fast, affordable, and reliable.",
-    // images: ["/twitter-image.jpg"],
+      "Orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee. No commission on a single sale, ever.",
   },
   robots: {
     index: true,
@@ -80,45 +84,56 @@ export const metadata: Metadata = {
   },
 };
 
+// Structured data describing ChopQik as business software.
+//
+// This previously declared "@type": "DeliveryService" with servesCuisine,
+// priceRange and restaurant opening hours — which told every search engine
+// that ChopQik is a takeaway operating in Benin City. It is a SaaS product
+// sold to restaurants, and the schema has to say so or the copy on the page
+// and the machine-readable description of the company disagree.
+//
+// No telephone number is published. The previous one was a placeholder that
+// does not connect. Add a real one here when there is a number that answers.
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "DeliveryService",
+  "@type": "SoftwareApplication",
   name: "ChopQik",
-  image: "https://chopqik.com/images/CHOP_Q_white_and_orange.png",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web browser",
   url: "https://chopqik.com",
-  telephone: "+234 800 CHOPQIK", // Placeholder
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Benin City",
-    addressLocality: "Benin City",
-    addressRegion: "Edo",
-    postalCode: "300001",
-    addressCountry: "NG",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 6.335,
-    longitude: 5.6037,
-  },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "08:00",
-      closes: "22:00",
-    },
+  image: "https://chopqik.com/images/CHOP_Q_white_and_orange.png",
+  description:
+    "An operating system for food and hospitality businesses in Nigeria. Orders, inventory, staff, reservations, catering, analytics and daily takings in one dashboard, with QR ordering for guests.",
+  featureList: [
+    "Counter and QR guest ordering",
+    "Real-time stock control and theft prevention",
+    "Staff accounts and permissions",
+    "Table reservations",
+    "Catering enquiries and estimates",
+    "Daily takings and analytics",
   ],
-  menu: "https://chopqik.com",
-  servesCuisine: "Nigerian, Continental, Fast Food",
-  priceRange: "₦500 - ₦15000",
+  offers: {
+    "@type": "Offer",
+    price: "30000",
+    priceCurrency: "NGN",
+    description:
+      "Flat monthly subscription. No commission on vendor sales. 60-day free trial.",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "ChopQik LTD",
+    url: "https://chopqik.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Benin City",
+      addressRegion: "Edo",
+      addressCountry: "NG",
+    },
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Nigeria",
+  },
 };
 
 export default function RootLayout({
