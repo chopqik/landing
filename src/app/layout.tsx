@@ -21,6 +21,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  // Without this, Next.js resolves og:image against http://localhost:3000 and
+  // every link preview on WhatsApp, LinkedIn and X silently fails. The build
+  // warns about it on every run.
+  metadataBase: new URL("https://chopqik.com"),
   title: "ChopQik | The Operating System for Nigerian Restaurants",
   description:
     "ChopQik runs the whole floor for restaurants, bars and hotels — orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee, no commission on any sale. Live in Benin City.",
@@ -46,10 +50,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        // TODO: this file does not exist yet. Until it does, every WhatsApp,
-        // LinkedIn and X share of chopqik.com shows a blank preview box.
-        // Needs one 1200x630 image in /public — a dashboard screenshot on the
-        // charcoal background, not the logo.
+        // 1200x630 card generated from the brand mark and the real order
+        // ticket UI. Lives at public/og-image.jpg. Regenerate it whenever
+        // the pricing or the headline changes — it is the first thing
+        // anyone sees when this link is shared.
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
