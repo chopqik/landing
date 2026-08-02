@@ -10,10 +10,18 @@ import { Menu, X } from "lucide-react";
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
+  // "Home" was dropped: the logo already links to "/", so it was a redundant
+  // item taking space in a pill that is tight at six links plus a CTA.
+  // "Pricing" replaces it. Cost is the first question every restaurant owner
+  // asks, and until now the only place ₦30,000 appeared was inside a
+  // horizontal-scroll panel that cannot be linked to — the panels sit in a
+  // transformed container, so an anchor would land on panel 01 regardless.
+  // #pricing points at the closing section, which states the trial, the
+  // monthly fee and the no-commission terms in plain language.
   const navLinks = [
-    { name: "Home", href: "/#hero" },
     { name: "About", href: "/#about" },
     { name: "How it Works", href: "/#how-it-works" },
+    { name: "Pricing", href: "/#pricing" },
     { name: "Reviews", href: "/#reviews" },
     { name: "Blog", href: "/#blog" },
     { name: "FAQ", href: "/#faq" },
@@ -34,7 +42,7 @@ export function Navbar() {
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
       >
-        <div className="pointer-events-auto flex items-center justify-between gap-6 md:gap-12 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 shadow-2xl max-w-5xl w-full">
+        <div className="pointer-events-auto flex items-center justify-between gap-4 lg:gap-8 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 shadow-2xl max-w-5xl w-full">
           {/* Logo */}
           <Link href="/" className="relative flex items-center shrink-0">
             <Image
@@ -48,12 +56,15 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all duration-300"
+                // whitespace-nowrap: without it "How it Works" breaks onto two
+                // lines while every other item sits on one, which makes the
+                // whole pill look unfinished.
+                className="whitespace-nowrap text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 px-3 lg:px-4 py-2 rounded-full transition-all duration-300"
               >
                 {link.name}
               </Link>
@@ -65,7 +76,7 @@ export function Navbar() {
             <Button
               asChild
               size="sm"
-              className="rounded-full bg-[#F2891C] hover:bg-[#F2891C]/90 text-white px-6 shadow-lg shadow-[#F2891C]/20 font-bold"
+              className="rounded-full bg-[#F2891C] hover:bg-[#F2891C]/90 text-white px-5 lg:px-6 shadow-lg shadow-[#F2891C]/20 font-bold whitespace-nowrap"
             >
               <Link href={CTA_HREF}>{CTA_LABEL}</Link>
             </Button>
@@ -74,6 +85,7 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 text-white hover:bg-white/10 rounded-full transition-colors"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>

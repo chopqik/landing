@@ -23,7 +23,10 @@ const GRAIN =
 
 export function WaitlistCTA() {
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden isolate bg-[#0E0E10]">
+    <section
+      id="pricing"
+      className="relative py-20 md:py-28 overflow-hidden isolate bg-[#0E0E10] scroll-mt-28"
+    >
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
