@@ -4,381 +4,537 @@ import * as React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
-  MessageCircle,
-  Star,
-  Quote,
-  MapPin,
+  ClipboardList,
+  Boxes,
+  Receipt,
+  CalendarCheck,
+  Percent,
+  WifiOff,
   ShieldCheck,
-  Rocket,
-  CreditCard,
-  BadgePercent,
-  Images,
-  LayoutDashboard,
+  Smartphone,
+  TrendingDown,
+  ArrowRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// --- DATA ---
+/* ------------------------------------------------------------------ */
+/*  DATA                                                               */
+/* ------------------------------------------------------------------ */
 
-const frustrations = [
+const realities = [
   {
-    text: "Delivery fees are crazy. 😫",
-    author: "Tired User",
-    rotation: -3,
-    color: "bg-red-500/10 border-red-500/20",
+    icon: ClipboardList,
+    title: "The record is a notebook",
+    body: "If it gets written at all. Closing time becomes an argument with your own memory about what actually went out today.",
   },
   {
-    text: "I waited over an hour, and the food is cold.",
-    author: "Hungry Customer",
-    rotation: 2,
-    color: "bg-orange-500/10 border-orange-500/20",
+    icon: TrendingDown,
+    title: "Stock walks",
+    body: "Nothing connects what came into the kitchen to what left it as a plate. The gap stays invisible until it is already large.",
   },
   {
-    text: "That small joint near me isn’t on any app.",
-    author: "Foodie in Benin",
-    rotation: -2,
-    color: "bg-blue-500/10 border-blue-500/20",
+    icon: Percent,
+    title: "Marketplaces take a cut of every plate",
+    body: "Commission on food delivery in this city runs as high as 24 percent. On restaurant margins, that is most of the profit.",
   },
 ];
 
-const customerBenefits = [
+const system = [
   {
-    icon: MapPin,
-    title: "Distance-Based Fees",
-    description: "No random surges. Pay strictly based on distance.",
-    color: "bg-blue-500",
+    icon: ClipboardList,
+    title: "Orders and kitchen tickets",
+    body: "The waiter takes it, the kitchen sees it. Nobody shouts across the room.",
+  },
+  {
+    icon: Boxes,
+    title: "Stock that counts itself down",
+    body: "Sell a bottle, the count drops. Low stock warns you before a customer does.",
+  },
+  {
+    icon: Receipt,
+    title: "Books that close themselves",
+    body: "Know what you sold before you lock the door, not three days later.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Tables, reservations, QR ordering",
+    body: "Guests scan the tent on the table and order without waiting to be seen.",
+  },
+];
+
+const deal = [
+  {
+    icon: Percent,
+    title: "Zero commission. Ever.",
+    body: "The price is the price whether you do two hundred thousand this month or two million.",
   },
   {
     icon: ShieldCheck,
-    title: "Local Support",
-    description: "Real humans in Benin City. No bots.",
-    color: "bg-green-500",
+    title: "Sixty days free",
+    body: "Run the whole system on real orders before you pay us anything.",
   },
   {
-    icon: Rocket,
-    title: "Neighborhood Gems",
-    description: "Find local spots not on the big apps.",
-    color: "bg-orange-500",
+    icon: WifiOff,
+    title: "Works when the network doesn't",
+    body: "Orders keep going while you are offline and sync themselves when the line returns.",
   },
   {
-    icon: CreditCard,
-    title: "Flexible Payment",
-    description: "Card, Transfer, or USSD.",
-    color: "bg-purple-500",
+    icon: Smartphone,
+    title: "Runs on the tablet you already have",
+    body: "No hardware to buy, no app store, no installation visit.",
   },
 ];
 
-const vendorBenefits = [
-  {
-    icon: BadgePercent,
-    title: "Fair Commission",
-    description: "We take a smaller cut so you make more.",
-    color: "bg-emerald-500",
-  },
-  {
-    icon: Images,
-    title: "Assisted Onboarding",
-    description: "Free professional photos for your menu.",
-    color: "bg-rose-500",
-  },
-  {
-    icon: LayoutDashboard,
-    title: "Vendor Dashboard",
-    description: "Track orders and earnings in real-time.",
-    color: "bg-indigo-500",
-  },
-];
+const PANELS = ["The reality", "The system", "The deal"];
 
-// --- COMPONENT ---
+/* ------------------------------------------------------------------ */
+/*  ATOMS                                                              */
+/* ------------------------------------------------------------------ */
 
-// --- COMPONENT ---
+const GRAIN =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter><rect width="140" height="140" filter="url(#n)" opacity="0.32"/></svg>`,
+  );
+
+function Eyebrow({ index, label }: { index: string; label: string }) {
+  return (
+    <div className="flex items-center gap-3 mb-6">
+      <span className="font-mono text-[11px] tracking-[0.3em] text-[#F2891C]">
+        {index}
+      </span>
+      <span className="h-px w-8 bg-[#F2891C]/40" />
+      <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-zinc-500">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function FeatureRow({
+  icon: Icon,
+  title,
+  body,
+  delay,
+}: {
+  icon: React.ElementType;
+  title: string;
+  body: string;
+  delay: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ delay, duration: 0.5, ease: "easeOut" }}
+      className="flex items-start gap-4 group"
+    >
+      <div className="mt-0.5 w-10 h-10 shrink-0 rounded-xl flex items-center justify-center border border-white/10 bg-white/[0.03] text-[#F2891C] transition-colors duration-300 group-hover:border-[#F2891C]/40 group-hover:bg-[#F2891C]/10">
+        <Icon size={18} strokeWidth={2} />
+      </div>
+      <div>
+        <h3 className="text-base md:text-lg font-bold text-zinc-100 mb-1 tracking-tight">
+          {title}
+        </h3>
+        <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+          {body}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SIGNATURE — live order queue, built in DOM, no images              */
+/* ------------------------------------------------------------------ */
+
+const TICKET_STAGES = ["New", "Preparing", "Ready"] as const;
+
+function OrderQueueMock() {
+  const [stage, setStage] = React.useState(0);
+
+  React.useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setStage(1);
+      return;
+    }
+    const t = setInterval(() => setStage((s) => (s + 1) % 3), 2600);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <div className="relative w-full max-w-[420px] mx-auto">
+      {/* glow behind the device */}
+      <div
+        className="absolute -inset-8 rounded-[3rem] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(60% 55% at 50% 40%, rgba(242,137,28,0.22), transparent 70%)",
+        }}
+      />
+
+      <div className="relative rounded-[1.75rem] border border-white/10 bg-[#141416] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.9)] overflow-hidden">
+        {/* app bar */}
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.07]">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-[#F2891C]" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-400">
+              Orders
+            </span>
+          </div>
+          <span className="font-mono text-[11px] text-zinc-500">3 open</span>
+        </div>
+
+        {/* active ticket */}
+        <div className="p-5 space-y-3">
+          <div className="rounded-2xl border border-[#F2891C]/25 bg-[#F2891C]/[0.04] p-4">
+            <div className="flex items-start justify-between mb-3">
+              <div>
+                <p className="text-zinc-100 font-bold text-sm">
+                  Table 7 · Dine-in
+                </p>
+                <p className="font-mono text-[11px] text-zinc-500 mt-0.5">
+                  #0142 · 7:42 PM
+                </p>
+              </div>
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#F2891C] text-black">
+                {TICKET_STAGES[stage]}
+              </span>
+            </div>
+
+            <div className="space-y-1.5 mb-3">
+              {[
+                ["2×", "Jollof Rice", "3,000"],
+                ["1×", "Pepper Soup (Goat)", "3,500"],
+                ["2×", "Chapman", "1,900"],
+              ].map(([q, name, price]) => (
+                <div
+                  key={name}
+                  className="flex items-baseline justify-between text-sm"
+                >
+                  <span className="text-zinc-300">
+                    <span className="font-mono text-zinc-500 mr-2">{q}</span>
+                    {name}
+                  </span>
+                  <span className="font-mono text-zinc-400 text-xs">
+                    ₦{price}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-between pt-3 border-t border-white/[0.07]">
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-white/[0.06] text-zinc-300 border border-white/10">
+                Transfer
+              </span>
+              <span className="font-mono text-base font-bold text-zinc-100">
+                ₦8,400
+              </span>
+            </div>
+
+            {/* progress */}
+            <div className="mt-3 flex gap-1">
+              {TICKET_STAGES.map((_, i) => (
+                <span
+                  key={i}
+                  className={cn(
+                    "h-1 flex-1 rounded-full transition-colors duration-500",
+                    i <= stage ? "bg-[#F2891C]" : "bg-white/10",
+                  )}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* low stock strip */}
+          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <Boxes size={15} className="text-zinc-500" />
+              <span className="text-sm text-zinc-300">Chapman</span>
+            </div>
+            <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">
+              4 left
+            </span>
+          </div>
+
+          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <Receipt size={15} className="text-zinc-500" />
+              <span className="text-sm text-zinc-300">Today's takings</span>
+            </div>
+            <span className="font-mono text-sm text-zinc-200">₦184,600</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SIGNATURE 2 — the money, side by side                              */
+/* ------------------------------------------------------------------ */
+
+function PriceMock() {
+  return (
+    <div className="relative w-full max-w-[420px] mx-auto">
+      <div
+        className="absolute -inset-8 rounded-[3rem] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(60% 55% at 50% 45%, rgba(242,137,28,0.18), transparent 70%)",
+        }}
+      />
+
+      <div className="relative rounded-[1.75rem] border border-white/10 bg-[#141416] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.9)] overflow-hidden">
+        <div className="px-5 py-3.5 border-b border-white/[0.07]">
+          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-400">
+            On ₦1,000,000 of sales
+          </span>
+        </div>
+
+        <div className="p-5 space-y-3">
+          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500 mb-2">
+              A marketplace at 24%
+            </p>
+            <p className="font-mono text-2xl font-bold text-zinc-500 line-through decoration-red-500/60 decoration-2">
+              ₦240,000
+            </p>
+            <p className="text-xs text-zinc-500 mt-1.5">
+              Charged again next month, and it grows as you do.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#F2891C]/30 bg-[#F2891C]/[0.06] p-4">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#F2891C] mb-2">
+              ChopQik
+            </p>
+            <div className="flex items-baseline gap-2">
+              <p className="font-mono text-3xl font-black text-zinc-50">
+                ₦30,000
+              </p>
+              <span className="text-sm text-zinc-400">/ month</span>
+            </div>
+            <p className="text-xs text-zinc-400 mt-1.5">
+              The same ₦30,000 on ₦10,000,000. First sixty days free.
+            </p>
+          </div>
+
+          <p className="font-mono text-[11px] text-zinc-600 leading-relaxed px-1">
+            Illustration only. Your customer pays you directly — ChopQik never
+            holds your money.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  PANEL SHELL                                                        */
+/* ------------------------------------------------------------------ */
+
+function Panel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative min-h-screen md:h-screen w-full md:w-screen flex items-center justify-center shrink-0 py-24 md:py-0">
+      <div className="container mx-auto px-5 md:px-8 relative z-10 w-full">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  MAIN                                                               */
+/* ------------------------------------------------------------------ */
 
 export function RealityScroll() {
   const targetRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
+  const { scrollYProgress } = useScroll({ target: targetRef });
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66.66%"]);
 
-  // Mobile detection for conditional rendering logic
   const [isDesktop, setIsDesktop] = React.useState(false);
+  const [active, setActive] = React.useState(0);
 
   React.useEffect(() => {
-    const checkDesktop = () => setIsDesktop(window.innerWidth >= 768);
-    checkDesktop();
-    window.addEventListener("resize", checkDesktop);
-    return () => window.removeEventListener("resize", checkDesktop);
+    const check = () => setIsDesktop(window.innerWidth >= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
+
+  React.useEffect(() => {
+    const unsub = scrollYProgress.on("change", (v) => {
+      setActive(v < 0.34 ? 0 : v < 0.67 ? 1 : 2);
+    });
+    return () => unsub();
+  }, [scrollYProgress]);
 
   return (
     <section
       id="about"
       ref={targetRef}
-      className="relative h-auto md:h-[300vh] bg-white"
+      className="relative h-auto md:h-[300vh] bg-[#0E0E10]"
     >
-      <div className="relative md:sticky md:top-0 flex flex-col md:flex-row h-auto md:h-screen items-center overflow-hidden md:overflow-hidden">
-        {/* Persistent Background Elements */}
-        <div className="absolute inset-0 bg-dot-black opacity-5 pointer-events-none" />
-        <div className="absolute inset-0 bg-white/40 mask-[radial-gradient(ellipse_at_center,transparent_20%,black_70%)] pointer-events-none" />
-
-        {/* Dynamic Glow Orbs - Deeper, more subtle */}
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 left-1/4 w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-[#F2891C]/20 rounded-full blur-[80px] md:blur-[150px] -translate-x-1/2 -translate-y-1/2 pointer-events-none mix-blend-multiply"
+      <div className="relative md:sticky md:top-0 flex flex-col md:flex-row h-auto md:h-screen items-center overflow-hidden">
+        {/* atmosphere — static, no infinite animation */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(70% 50% at 20% 0%, rgba(242,137,28,0.10), transparent 60%), radial-gradient(50% 40% at 90% 100%, rgba(242,137,28,0.06), transparent 65%)",
+          }}
         />
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.25] mix-blend-overlay"
+          style={{ backgroundImage: `url("${GRAIN}")` }}
+        />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
         <motion.div
-          style={isDesktop ? { x } : {}}
+          style={isDesktop ? { x } : undefined}
           className="flex flex-col md:flex-row w-full md:w-auto"
         >
-          {/* SECTION 1: REALITY (The Wall of Frustration) */}
-          <div className="relative min-h-screen md:h-screen w-full md:w-screen flex items-center justify-center shrink-0 py-20 md:py-0">
-            <div className="absolute inset-0 grid place-items-center opacity-10 pointer-events-none select-none overflow-hidden">
-              <span className="text-6xl md:text-[20vw] font-black leading-none text-transparent [-webkit-text-stroke:1px_#e4e4e7] md:[-webkit-text-stroke:2px_#e4e4e7]">
-                {/* REALITY */}
-              </span>
+          {/* ---------------- 01 — THE REALITY ---------------- */}
+          <Panel>
+            <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+              <div className="flex justify-center">
+                <Eyebrow index="01" label="The reality" />
+              </div>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-zinc-50 tracking-tight leading-[0.95] mb-6">
+                Most kitchens are
+                <br />
+                <span className="text-[#F2891C]">flying blind.</span>
+              </h2>
+              <p className="text-base md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+                Not because the owner doesn't care. Because nothing in the
+                building is writing anything down.
+              </p>
             </div>
 
-            <div className="container mx-auto px-4 relative z-10 grid place-items-center Content">
-              <div className="text-center mb-12 md:mb-16">
-                <h2 className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#F2891C] mb-4">
-                  The Current State
+            <div className="grid gap-4 md:gap-6 md:grid-cols-3 max-w-5xl mx-auto">
+              {realities.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  className="relative rounded-[1.5rem] border border-white/[0.08] bg-white/[0.02] p-6 md:p-7 transition-colors duration-300 hover:border-[#F2891C]/30 hover:bg-white/[0.04]"
+                >
+                  <span className="font-mono text-[11px] text-zinc-600 absolute top-6 right-6">
+                    0{i + 1}
+                  </span>
+                  <div className="w-11 h-11 rounded-xl border border-white/10 bg-[#F2891C]/10 text-[#F2891C] flex items-center justify-center mb-5">
+                    <item.icon size={19} strokeWidth={2} />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-bold text-zinc-100 mb-2.5 tracking-tight leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+                    {item.body}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </Panel>
+
+          {/* ---------------- 02 — THE SYSTEM ---------------- */}
+          <Panel>
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 max-w-6xl mx-auto">
+              <div className="lg:w-1/2 w-full order-2 lg:order-1">
+                <Eyebrow index="02" label="The system" />
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-zinc-50 tracking-tight leading-[0.95] mb-5">
+                  One system.
+                  <br />
+                  <span className="text-[#F2891C]">The whole floor.</span>
                 </h2>
-                <h3 className="text-4xl md:text-7xl font-black text-zinc-900 mb-6 tracking-tight">
-                  Ordering is Broken.
-                </h3>
-                <p className="text-lg md:text-xl text-zinc-500 max-w-xl md:max-w-2xl mx-auto">
-                  We heard the complaints loud and clear. It’s time for
-                  something better.
+                <p className="text-base md:text-lg text-zinc-400 leading-relaxed mb-9 max-w-lg">
+                  Orders, kitchen, stock, tables and books, running on the
+                  tablet on your counter. Live in four kitchens in Benin City
+                  today, from a hotel restaurant to a delivery-only kitchen.
                 </p>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-6 md:gap-12">
-                {frustrations.map((item, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "relative bg-white/60 backdrop-blur-xl border border-zinc-200 p-6 md:p-10 rounded-3xl md:rounded-[2rem] shadow-xl w-full max-w-[320px] md:max-w-sm transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 group",
-                      item.color.replace("/10", "/5").replace("/20", "/20"),
-                    )}
-                    style={{
-                      rotate: isDesktop ? `${item.rotation}deg` : "0deg",
-                    }}
-                  >
-                    <Quote className="text-zinc-400 mb-4 md:mb-6 w-8 h-8 md:w-10 md:h-10 group-hover:text-[#F2891C] transition-colors duration-300" />
-                    <p className="text-xl md:text-2xl font-semibold text-zinc-700 mb-4 md:mb-6 leading-tight group-hover:text-zinc-900 transition-colors">
-                      "{item.text}"
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-100 flex items-center justify-center text-xs md:text-sm text-zinc-500 font-bold border border-zinc-200">
-                        {item.author[0]}
-                      </div>
-                      <span className="text-xs md:text-sm font-medium text-zinc-500 uppercase tracking-wider">
-                        {item.author}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* SECTION 2: CUSTOMER BENEFITS (The Solution) */}
-          <div className="relative min-h-screen md:h-screen w-full md:w-screen flex items-center justify-center shrink-0 py-20 md:py-0">
-            {/* MASSIVE CINEMATIC BACKDROP TEXT */}
-            <div className="absolute md:grid place-items-center pointer-events-none select-none overflow-hidden bottom-0 hidden">
-              <span className="text-6xl md:text-[20vw] font-black leading-none text-transparent [-webkit-text-stroke:1px_#e4e4e7] md:[-webkit-text-stroke:2px_#e4e4e7] whitespace-nowrap">
-                CUSTOMER
-              </span>
-            </div>
-
-            <div className="container mx-auto px-4 relative z-10 w-full">
-              <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-                {/* Image Composition Left */}
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="lg:w-1/2 w-full relative h-[400px] md:h-[600px] rounded-4xl overflow-hidden shadow-2xl group"
-                >
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 z-10" />
-                  <img
-                    src="/images/keesha-s-kitchen-eaSIzdS8pv0-unsplash.jpg"
-                    alt="Delicious fresh food delivery"
-                    className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-1000"
-                  />
-                  {/* Floating Badge */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5, duration: 0.6 }}
-                    className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-4"
-                  >
-                    <div className="bg-green-100 text-green-600 p-2 rounded-full">
-                      <ShieldCheck size={24} />
-                    </div>
-                    <div>
-                      <p className="text-zinc-900 font-bold leading-tight">
-                        100% Secure
-                      </p>
-                      <p className="text-zinc-500 text-sm">Local Support</p>
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-                {/* Text Content Right */}
-                <div className="lg:w-1/2 w-full space-y-8 md:space-y-10">
-                  <div className="text-center lg:text-left">
-                    <div className="inline-block px-4 py-1.5 rounded-full border border-[#F2891C]/20 bg-[#F2891C]/5 text-[#F2891C] text-xs font-bold uppercase tracking-wider mb-4">
-                      Customer Experience
-                    </div>
-                    <h2 className="text-4xl md:text-6xl font-black text-zinc-900 leading-tight mb-4">
-                      More Than <br />
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F2891C] to-orange-400">
-                        Just Food.
-                      </span>
-                    </h2>
-                    <p className="text-lg md:text-xl text-zinc-600 leading-relaxed font-light">
-                      A delivery experience built around your actual needs. No
-                      hidden fees. No cold food. Just vibes and great meals.
-                    </p>
-                  </div>
-
-                  <div className="space-y-6">
-                    {customerBenefits.map((item, i) => (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1, duration: 0.5 }}
-                        key={i}
-                        className="flex items-start gap-5 group"
-                      >
-                        <div
-                          className={cn(
-                            "mt-1 w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center text-white bg-zinc-100 border border-zinc-200 group-hover:bg-[#F2891C] group-hover:text-white group-hover:border-[#F2891C] transition-all duration-300 shadow-sm",
-                            item.color.replace("bg-", "text-"),
-                          )}
-                        >
-                          <item.icon size={22} />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-bold text-zinc-900 mb-1 group-hover:text-[#F2891C] transition-colors">
-                            {item.title}
-                          </h3>
-                          <p className="text-base text-zinc-500 leading-relaxed group-hover:text-zinc-700 transition-colors">
-                            {item.description}
-                          </p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+                <div className="space-y-6">
+                  {system.map((item, i) => (
+                    <FeatureRow key={item.title} {...item} delay={i * 0.08} />
+                  ))}
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* SECTION 3: VENDOR BENEFITS (The Partnership) */}
-          <div className="relative min-h-screen md:h-screen w-full md:w-screen flex items-center justify-center shrink-0 py-20 md:py-0">
-            {/* MASSIVE CINEMATIC BACKDROP TEXT */}
-            <div className="absolute md:grid place-items-center pointer-events-none select-none overflow-hidden top-0 hidden">
-              <span className="text-6xl md:text-[20vw] font-black leading-none text-transparent [-webkit-text-stroke:1px_#e4e4e7] md:[-webkit-text-stroke:2px_#e4e4e7] whitespace-nowrap">
-                VENDOR
-              </span>
-            </div>
-
-            <div className="container mx-auto px-4 relative z-10 w-full">
-              <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
-                {/* Image Composition Right */}
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="lg:w-1/2 w-full relative h-[400px] md:h-[600px] rounded-4xl overflow-hidden shadow-2xl group"
-                >
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 z-10" />
-                  <img
-                    src="/images/keesha-s-kitchen-jvFeJhQ6Xsk-unsplash.jpg"
-                    alt="Busy restaurant kitchen preparing orders"
-                    className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-1000"
-                  />
-                  {/* Floating Badge */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5, duration: 0.6 }}
-                    className="absolute top-6 right-6 z-20 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-4"
-                  >
-                    <div className="bg-orange-100 text-orange-600 p-2 rounded-full">
-                      <LayoutDashboard size={24} />
-                    </div>
-                    <div>
-                      <p className="text-zinc-900 font-bold leading-tight">
-                        Smart Tools
-                      </p>
-                      <p className="text-zinc-500 text-sm">Grow Revenue</p>
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-                {/* Text Content Left */}
-                <div className="lg:w-1/2 w-full space-y-8 md:space-y-10">
-                  <div className="text-center lg:text-left">
-                    <div className="inline-block px-4 py-1.5 rounded-full border border-zinc-200 bg-zinc-100 text-zinc-500 text-xs font-bold uppercase tracking-wider mb-4">
-                      Vendor Partnership
-                    </div>
-                    <h2 className="text-4xl md:text-6xl font-black text-zinc-900 leading-tight mb-4">
-                      Build Your <br />
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F2891C] to-orange-400">
-                        Empire.
-                      </span>
-                    </h2>
-                    <p className="text-lg md:text-xl text-zinc-600 leading-relaxed font-light">
-                      We don't just deliver your food. We provide the tools,
-                      data, and dedicated support to help your restaurant scale
-                      sustainably.
-                    </p>
-                  </div>
-
-                  <div className="space-y-6">
-                    {vendorBenefits.map((item, i) => (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1, duration: 0.5 }}
-                        key={i}
-                        className="flex items-start gap-5 group"
-                      >
-                        <div
-                          className={cn(
-                            "mt-1 w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center text-white bg-zinc-100 border border-zinc-200 group-hover:bg-zinc-900 group-hover:text-white group-hover:border-zinc-900 transition-all duration-300 shadow-sm",
-                            item.color.replace("bg-", "text-"),
-                          )}
-                        >
-                          <item.icon size={22} />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-bold text-zinc-900 mb-1 group-hover:text-zinc-700 transition-colors">
-                            {item.title}
-                          </h3>
-                          <p className="text-base text-zinc-500 leading-relaxed group-hover:text-zinc-900 transition-colors">
-                            {item.description}
-                          </p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+              <div className="lg:w-1/2 w-full order-1 lg:order-2">
+                <OrderQueueMock />
               </div>
             </div>
-          </div>
+          </Panel>
+
+          {/* ---------------- 03 — THE DEAL ---------------- */}
+          <Panel>
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20 max-w-6xl mx-auto">
+              <div className="lg:w-1/2 w-full">
+                <Eyebrow index="03" label="The deal" />
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-zinc-50 tracking-tight leading-[0.95] mb-5">
+                  We never touch
+                  <br />
+                  <span className="text-[#F2891C]">your sales.</span>
+                </h2>
+                <p className="text-base md:text-lg text-zinc-400 leading-relaxed mb-9 max-w-lg">
+                  Thirty thousand naira a month, flat. Not a percentage, not per
+                  order. Your customer pays you, and ChopQik is not standing in
+                  the middle of it.
+                </p>
+                <div className="space-y-6 mb-10">
+                  {deal.map((item, i) => (
+                    <FeatureRow key={item.title} {...item} delay={i * 0.08} />
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F2891C] px-7 py-3.5 text-sm font-bold text-black transition-transform duration-200 hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F2891C]"
+                  >
+                    Get ChopQik for your business
+                    <ArrowRight size={16} strokeWidth={2.5} />
+                  </a>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-500">
+                    Delivery comes last, not first
+                  </p>
+                </div>
+              </div>
+
+              <div className="lg:w-1/2 w-full">
+                <PriceMock />
+              </div>
+            </div>
+          </Panel>
         </motion.div>
+
+        {/* progress rail — desktop only */}
+        <div className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 z-20 items-center gap-5">
+          {PANELS.map((label, i) => (
+            <div key={label} className="flex items-center gap-2.5">
+              <span
+                className={cn(
+                  "h-px transition-all duration-500",
+                  i === active ? "w-10 bg-[#F2891C]" : "w-5 bg-white/20",
+                )}
+              />
+              <span
+                className={cn(
+                  "font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-500",
+                  i === active ? "text-zinc-200" : "text-zinc-600",
+                )}
+              >
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
