@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Hero, WaitlistCTA, ContactForm } from "@/components/sections";
-// import { ServiceGrid } from "@/components/sections/service-grid";
 import { RealityScroll } from "@/components/sections/reality-scroll";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { TestimonialSwitcher as SocialProof } from "@/components/sections/testimonials";
@@ -28,7 +27,6 @@ export default function Home() {
         onVendorClick={() => openPartnerModal("vendor")}
         onRiderClick={() => openPartnerModal("rider")}
       />
-      {/* <ServiceGrid /> */}
       <RealityScroll />
       <HowItWorks />
       <SocialProof />
