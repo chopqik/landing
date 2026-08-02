@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { SplashScreen } from "@/components/ui/splash-screen";
-import { TawkToScript } from "@/components/ui/tawk-to-script";
 import { MobileWaitlistButton } from "@/components/ui/mobile-waitlist-button";
 import Providers from "./Providers";
 
@@ -136,6 +135,18 @@ const jsonLd = {
   },
 };
 
+// The Tawk.to live chat widget was removed here.
+//
+// It rendered a fixed panel over the bottom-right of every page, covering the
+// no-commission line in the hero, the takings figure in the About section and
+// the pricing card. It also promised "Hi! How can we help?" with an unread
+// badge, implying someone is standing by — there is one person running this
+// company, and an unanswered chat is worse than no chat. Vendors reach
+// ChopQik on WhatsApp, which is answered.
+//
+// The component still exists at components/ui/tawk-to-script.tsx. To bring it
+// back, restore the import and place <TawkToScript /> below <Footer />.
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -161,7 +172,6 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <TawkToScript />
           <MobileWaitlistButton />
         </Providers>
       </body>
