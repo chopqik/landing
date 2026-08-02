@@ -1,18 +1,336 @@
 "use client";
 
+// NOTE: the filename is a leftover. This is no longer a phone — it is a
+// tablet running the vendor dashboard. The export name is unchanged so
+// how-it-works/index.tsx needs no edit.
+//
+// What this section used to be: a consumer delivery demo. Three screens
+// showing browse -> cart with a ₦500 delivery fee -> a map with a dashed
+// route and "Musa is arriving, 5 mins away". ChopQik has no riders and no
+// consumer app. It was a mockup of a product that does not exist, sitting
+// one scroll below a section that says delivery comes last.
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
-import {
-  MapPin,
-  ShoppingBag,
-  Truck,
-  ChefHat,
-  Utensils,
-  Star,
-  Clock,
-  Heart,
-} from "lucide-react";
+import { ClipboardList, LayoutGrid, Receipt } from "lucide-react";
+
+/* ------------------------------------------------------------------ */
+/*  PRODUCT PALETTE — these are the dashboard's real tokens            */
+/* ------------------------------------------------------------------ */
+
+const PARCHMENT = "#FDF6EC";
+const PARCHMENT_DEEP = "#E8D5B8";
+const CHARCOAL = "#1C1C1C";
+const ORANGE = "#F2891C";
+
+/* ------------------------------------------------------------------ */
+/*  TYPE SCALE — sized for a ~700px viewport, scales up on tall screens */
+/* ------------------------------------------------------------------ */
+
+const STEP_TITLE =
+  "text-[clamp(2rem,4vw,3.5rem)] [@media(min-height:900px)]:text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.95] tracking-tight";
+
+const STEP_BODY =
+  "text-[clamp(0.95rem,1.1vw,1.1rem)] [@media(min-height:900px)]:text-[1.2rem] leading-relaxed";
+
+/* ------------------------------------------------------------------ */
+/*  SCREEN 1 — the menu we build for you                               */
+/* ------------------------------------------------------------------ */
+
+function MenuScreen() {
+  const items: [string, string, boolean][] = [
+    ["Jollof Rice", "1,500", true],
+    ["Pepper Soup (Goat)", "3,500", true],
+    ["Ofada & Ayamase", "2,800", true],
+    ["Grilled Croaker", "6,000", false],
+    ["Chapman", "950", true],
+    ["Small Chops", "2,000", true],
+  ];
+
+  return (
+    <div className="h-full flex flex-col" style={{ background: PARCHMENT }}>
+      <div
+        className="px-4 py-3 flex items-center justify-between border-b"
+        style={{ borderColor: PARCHMENT_DEEP }}
+      >
+        <span
+          className="text-[11px] font-bold uppercase tracking-wider"
+          style={{ color: CHARCOAL }}
+        >
+          Menu
+        </span>
+        <span className="font-mono text-[10px] text-zinc-500">171 items</span>
+      </div>
+
+      <div className="flex-1 p-3 space-y-1.5 overflow-hidden">
+        <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-400 px-1 pb-1">
+          Main courses
+        </p>
+        {items.map(([name, price, available]) => (
+          <div
+            key={name}
+            className="bg-white rounded-lg px-3 py-2 flex items-center justify-between border"
+            style={{ borderColor: PARCHMENT_DEEP }}
+          >
+            <div className="flex items-center gap-2 min-w-0">
+              <span
+                className={cn(
+                  "w-1.5 h-1.5 rounded-full shrink-0",
+                  available ? "bg-emerald-500" : "bg-zinc-300",
+                )}
+              />
+              <span
+                className={cn(
+                  "text-[12px] truncate",
+                  available ? "" : "text-zinc-400 line-through",
+                )}
+                style={available ? { color: CHARCOAL } : undefined}
+              >
+                {name}
+              </span>
+            </div>
+            <span className="font-mono text-[11px] text-zinc-500 shrink-0 ml-2">
+              ₦{price}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div
+        className="px-4 py-3 border-t text-[10px] text-zinc-500"
+        style={{ borderColor: PARCHMENT_DEEP }}
+      >
+        Tap any item to take it off the menu when it finishes.
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SCREEN 2 — the floor                                               */
+/* ------------------------------------------------------------------ */
+
+function FloorScreen() {
+  const tables: [string, string | null, boolean][] = [
+    ["1", "12,400", false],
+    ["2", null, false],
+    ["3", "6,000", false],
+    ["4", "8,400", true],
+    ["5", null, false],
+    ["6", "3,200", false],
+    ["VIP", "45,000", false],
+    ["8", null, false],
+    ["9", "1,900", false],
+  ];
+
+  return (
+    <div className="h-full flex flex-col" style={{ background: PARCHMENT }}>
+      <div
+        className="px-4 py-3 flex items-center justify-between border-b"
+        style={{ borderColor: PARCHMENT_DEEP }}
+      >
+        <span
+          className="text-[11px] font-bold uppercase tracking-wider"
+          style={{ color: CHARCOAL }}
+        >
+          Tables
+        </span>
+        <span className="font-mono text-[10px] text-zinc-500">6 seated</span>
+      </div>
+
+      <div className="flex-1 p-3">
+        <div className="grid grid-cols-3 gap-2">
+          {tables.map(([label, amount, calling]) => (
+            <div
+              key={label}
+              className={cn(
+                "rounded-lg border p-2 h-[62px] flex flex-col justify-between",
+                calling && "animate-pulse",
+              )}
+              style={{
+                background: amount ? "#FFFFFF" : "transparent",
+                borderColor: calling ? ORANGE : PARCHMENT_DEEP,
+                borderWidth: calling ? 2 : 1,
+              }}
+            >
+              <span
+                className="text-[11px] font-bold"
+                style={{ color: amount ? CHARCOAL : "#A1A1AA" }}
+              >
+                {label}
+              </span>
+              {amount ? (
+                <span
+                  className="font-mono text-[10px]"
+                  style={{ color: calling ? ORANGE : "#71717A" }}
+                >
+                  ₦{amount}
+                </span>
+              ) : (
+                <span className="font-mono text-[9px] text-zinc-400">free</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="mx-3 mb-3 rounded-lg px-3 py-2.5 flex items-center gap-2"
+        style={{ background: `${ORANGE}1A`, border: `1px solid ${ORANGE}55` }}
+      >
+        <span
+          className="w-2 h-2 rounded-full shrink-0"
+          style={{ background: ORANGE }}
+        />
+        <span className="text-[11px]" style={{ color: CHARCOAL }}>
+          Table 4 is asking for a waiter
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SCREEN 3 — the books                                               */
+/* ------------------------------------------------------------------ */
+
+function BooksScreen() {
+  const rows: [string, string][] = [
+    ["Transfer", "142,300"],
+    ["Cash", "38,500"],
+    ["POS", "22,000"],
+  ];
+
+  return (
+    <div className="h-full flex flex-col" style={{ background: PARCHMENT }}>
+      <div
+        className="px-4 py-3 flex items-center justify-between border-b"
+        style={{ borderColor: PARCHMENT_DEEP }}
+      >
+        <span
+          className="text-[11px] font-bold uppercase tracking-wider"
+          style={{ color: CHARCOAL }}
+        >
+          Books
+        </span>
+        <span className="font-mono text-[10px] text-zinc-500">Today</span>
+      </div>
+
+      <div className="p-3 space-y-2.5 flex-1">
+        <div
+          className="rounded-xl p-4 border"
+          style={{ background: "#FFFFFF", borderColor: PARCHMENT_DEEP }}
+        >
+          <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-400 mb-1">
+            Taken today
+          </p>
+          <p
+            className="font-mono text-2xl font-black"
+            style={{ color: CHARCOAL }}
+          >
+            ₦202,800
+          </p>
+          <p className="text-[10px] text-zinc-500 mt-0.5">
+            41 orders · 3 still unpaid
+          </p>
+        </div>
+
+        <div
+          className="rounded-xl border divide-y"
+          style={{ background: "#FFFFFF", borderColor: PARCHMENT_DEEP }}
+        >
+          {rows.map(([label, amount]) => (
+            <div
+              key={label}
+              className="px-3 py-2 flex items-center justify-between"
+              style={{ borderColor: PARCHMENT_DEEP }}
+            >
+              <span className="text-[11px] text-zinc-600">{label}</span>
+              <span
+                className="font-mono text-[11px]"
+                style={{ color: CHARCOAL }}
+              >
+                ₦{amount}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-2.5">
+          <p className="text-[11px] text-red-700">
+            Chapman is down to 4. Reorder before Friday.
+          </p>
+        </div>
+      </div>
+
+      <div
+        className="px-4 py-3 border-t text-[10px] text-zinc-500"
+        style={{ borderColor: PARCHMENT_DEEP }}
+      >
+        Every figure here traces back to a ticket.
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  DEVICE FRAME — a tablet. No island, no home bar, even bezel.       */
+/* ------------------------------------------------------------------ */
+
+function TabletFrame({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "relative rounded-[1.5rem] bg-zinc-900 p-2.5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.35)] ring-1 ring-black/10",
+        className,
+      )}
+    >
+      <span className="absolute top-[9px] left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-zinc-700" />
+      <div className="relative w-full h-full rounded-[0.9rem] overflow-hidden">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  STEPS                                                              */
+/* ------------------------------------------------------------------ */
+
+const steps = [
+  {
+    id: "01",
+    title: "We build your menu",
+    desc: "Send a photograph of your menu or a list on WhatsApp. We enter every item, price and category for you. There is no setup fee and no typing on your side.",
+    icon: ClipboardList,
+    Screen: MenuScreen,
+  },
+  {
+    id: "02",
+    title: "Your staff run the floor",
+    desc: "About an hour of training on the tablet you already own. A waiter taps the table, the kitchen sees the ticket, and a guest can call for attention without standing up.",
+    icon: LayoutGrid,
+    Screen: FloorScreen,
+  },
+  {
+    id: "03",
+    title: "The day closes itself",
+    desc: "Before you lock up you can see what was sold, how it was paid for, what is running low, and what was cancelled. No adding up a notebook at midnight.",
+    icon: Receipt,
+    Screen: BooksScreen,
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/*  MAIN                                                               */
+/* ------------------------------------------------------------------ */
 
 export function HowItWorks() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -21,264 +339,101 @@ export function HowItWorks() {
     offset: ["start start", "end end"],
   });
 
+  // Hooks must be called unconditionally at the top level — never inside the
+  // map below.
+  const op1 = useTransform(scrollYProgress, [0, 0.28], [1, 0]);
+  const op2 = useTransform(
+    scrollYProgress,
+    [0.25, 0.35, 0.62, 0.72],
+    [0, 1, 1, 0],
+  );
+  const op3 = useTransform(scrollYProgress, [0.68, 0.78], [0, 1]);
+
   return (
     <section
       id="how-it-works"
       ref={containerRef}
-      className="bg-white relative py-20 md:py-0"
+      className="relative py-20 md:py-0"
+      style={{ background: "#FBF8F4" }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-5 md:px-8">
         <div className="flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-0">
-          {/* Sticky Phone Mockup - Hidden on Mobile */}
-          <div className="hidden md:flex sticky top-0 h-screen items-center justify-center order-2 md:order-1 pt-20 md:pt-0">
-            <div className="relative w-[320px] h-[650px] bg-white rounded-[3rem] border-4 border-zinc-200 p-2 shadow-2xl overflow-hidden ring-1 ring-black/5">
-              {/* Dynamic Island Area */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-7 bg-black rounded-b-2xl z-50 flex items-center justify-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-                <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-              </div>
-
-              {/* Bezel & Screen Container */}
-              <div className="relative w-full h-full bg-zinc-50 rounded-[2.5rem] overflow-hidden border border-zinc-100 flex flex-col">
-                {/* Persistent App Header */}
-                <div className="h-14 bg-white border-b border-zinc-100 flex items-center justify-between px-6 pt-2 z-40 shrink-0">
-                  <div className="w-8 h-8 rounded-full bg-[#F2891C]/10 flex items-center justify-center text-[#F2891C]">
-                    <ChefHat size={16} />
-                  </div>
-                  <span className="font-bold text-zinc-900 text-sm">
-                    ChopQik
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center">
-                    <ShoppingBag size={14} className="text-zinc-600" />
-                  </div>
-                </div>
-
-                {/* Screen 1: Browse (Active 0 - 0.3) */}
-                <motion.div
-                  className="absolute inset-0 top-14 bg-zinc-50 flex flex-col p-4 gap-3 overflow-hidden"
-                  style={{
-                    opacity: useTransform(scrollYProgress, [0, 0.25], [1, 0]),
-                  }}
-                >
-                  <div className="flex gap-2 mb-2 overflow-hidden">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="h-24 w-32 shrink-0 rounded-xl bg-zinc-200 animate-pulse"
-                      />
-                    ))}
-                  </div>
-                  <div className="h-8 w-3/4 bg-zinc-200 rounded-md animate-pulse mb-4" />
-
-                  {/* Vendor Card */}
-                  <div className="bg-white p-3 rounded-2xl border border-zinc-100 shadow-sm flex gap-3">
-                    <div className="w-20 h-20 bg-[#F2891C]/20 rounded-xl flex items-center justify-center text-[#F2891C]">
-                      <Utensils size={24} />
-                    </div>
-                    <div className="flex-1 space-y-2">
-                      <div className="h-4 w-32 bg-zinc-100 rounded" />
-                      <div className="flex gap-1">
-                        <Star
-                          size={12}
-                          className="text-orange-400 fill-orange-400"
-                        />
-                        <Star
-                          size={12}
-                          className="text-orange-400 fill-orange-400"
-                        />
-                        <Star
-                          size={12}
-                          className="text-orange-400 fill-orange-400"
-                        />
-                        <Star
-                          size={12}
-                          className="text-orange-400 fill-orange-400"
-                        />
-                        <Star size={12} className="text-zinc-200" />
-                      </div>
-                      <div className="flex justify-between items-end">
-                        <div className="h-3 w-16 bg-zinc-100 rounded" />
-                        <div className="bg-[#F2891C] text-white text-[10px] font-bold px-2 py-1 rounded-full">
-                          ADD
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white p-3 rounded-2xl border border-zinc-100 shadow-sm flex gap-3 opacity-60">
-                    <div className="w-20 h-20 bg-zinc-100 rounded-xl" />
-                    <div className="flex-1 space-y-2">
-                      <div className="h-4 w-28 bg-zinc-100 rounded" />
-                      <div className="h-3 w-12 bg-zinc-100 rounded" />
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Screen 2: Order/Cart (Active 0.3 - 0.6) */}
-                <motion.div
-                  className="absolute inset-0 top-14 bg-white flex flex-col"
-                  style={{
-                    opacity: useTransform(
-                      scrollYProgress,
-                      [0.25, 0.35, 0.6, 0.7],
-                      [0, 1, 1, 0],
-                    ),
-                    y: useTransform(scrollYProgress, [0.25, 0.35], [20, 0]),
-                  }}
-                >
-                  <div className="p-6 flex-1">
-                    <h4 className="font-bold text-xl text-zinc-900 mb-6">
-                      Your Order
-                    </h4>
-                    <div className="space-y-4">
-                      {[1, 2].map((i) => (
-                        <div
-                          key={i}
-                          className="flex justify-between items-center pb-4 border-b border-zinc-50"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center text-[#F2891C] font-bold">
-                              x1
-                            </div>
-                            <div>
-                              <div className="font-medium text-zinc-800">
-                                Jollof Combo
-                              </div>
-                              <div className="text-xs text-zinc-400">
-                                + Spicy Chicken
-                              </div>
-                            </div>
-                          </div>
-                          <div className="font-bold text-zinc-900">₦4,500</div>
-                        </div>
-                      ))}
-                      <div className="flex justify-between pt-2">
-                        <span className="text-zinc-500">Delivery Fee</span>
-                        <span className="font-medium">₦500</span>
-                      </div>
-                      <div className="flex justify-between pt-2 text-lg font-black text-zinc-900 border-t border-zinc-100 mt-4">
-                        <span>Total</span>
-                        <span>₦9,500</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-6 bg-zinc-50 border-t border-zinc-100">
-                    <button className="w-full bg-[#F2891C] text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-200 flex items-center justify-center gap-2">
-                      <span>Checkout</span>
-                      <ShoppingBag size={18} />
-                    </button>
-                  </div>
-                </motion.div>
-
-                {/* Screen 3: Delivery (Active 0.6 - 1.0) */}
-                <motion.div
-                  className="absolute inset-0 top-14 bg-zinc-50 z-20"
-                  style={{
-                    opacity: useTransform(scrollYProgress, [0.6, 0.7], [0, 1]),
-                  }}
-                >
-                  {/* Map Background */}
-                  <div className="absolute inset-0 bg-zinc-200">
-                    <div className="absolute top-1/2 left-1/2 w-full h-1 bg-white -rotate-45" />
-                    <div className="absolute top-1/3 left-1/3 w-1 h-full bg-white rotate-12" />
-                    {/* Route Line */}
-                    <svg className="absolute inset-0 w-full h-full">
-                      <path
-                        d="M 100 100 Q 150 250 220 400"
-                        stroke="#f2891c"
-                        strokeWidth="4"
-                        fill="none"
-                        strokeDasharray="8 4"
-                      />
-                    </svg>
-                    <div className="absolute bottom-1/4 right-1/4 w-4 h-4 rounded-full bg-[#F2891C] animate-ping" />
-                    <div className="absolute bottom-1/4 right-1/4 w-4 h-4 rounded-full bg-[#F2891C] border-2 border-white shadow-lg" />
-                  </div>
-
-                  {/* Rider Info Card */}
-                  <div className="absolute bottom-6 left-4 right-4 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4">
-                    <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-white">
-                      <Truck size={20} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-bold text-zinc-900">
-                        Musa is arriving
-                      </div>
-                      <div className="text-xs text-zinc-500 flex items-center gap-1">
-                        <Clock size={10} /> 5 mins away
-                      </div>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                      <Heart size={18} className="fill-green-600" />
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Persistent Home Indicator */}
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-zinc-300 rounded-full z-50" />
-              </div>
-            </div>
+          {/* ── Sticky tablet — desktop only ────────────────────────── */}
+          <div className="hidden md:flex sticky top-0 h-screen items-center justify-center order-2 md:order-1 pt-24 pb-12">
+            <TabletFrame className="w-[300px] h-[500px]">
+              <motion.div style={{ opacity: op1 }} className="absolute inset-0">
+                <MenuScreen />
+              </motion.div>
+              <motion.div style={{ opacity: op2 }} className="absolute inset-0">
+                <FloorScreen />
+              </motion.div>
+              <motion.div style={{ opacity: op3 }} className="absolute inset-0">
+                <BooksScreen />
+              </motion.div>
+            </TabletFrame>
           </div>
 
-          {/* scrollable Text Content */}
+          {/* ── Steps ───────────────────────────────────────────────── */}
           <div className="order-1 md:order-2">
-            {/* Mobile Header */}
-            <div className="mb-12 md:hidden text-center">
-              <div className="inline-block px-4 py-1.5 rounded-full border border-[#F2891C]/20 bg-[#F2891C]/5 text-[#F2891C] text-xs font-bold uppercase tracking-wider mb-4">
-                How it works
+            {/* Mobile heading */}
+            <div className="mb-10 md:hidden text-center">
+              <div className="inline-block px-4 py-1.5 rounded-full border border-[#F2891C]/25 bg-[#F2891C]/5 text-[#F2891C] text-[11px] font-bold uppercase tracking-wider mb-4">
+                Getting started
               </div>
-              <h2 className="text-4xl font-black text-zinc-900 leading-tight">
-                Simple as <br />
-                1, 2, 3.
+              <h2 className="text-4xl font-black text-zinc-900 leading-[0.95] tracking-tight">
+                Live by the
+                <br />
+                weekend.
               </h2>
             </div>
 
-            {[
-              {
-                id: "01",
-                title: "Choose Vendor",
-                desc: "Browse heavily vetted local restaurants and top-tier street food vendors.",
-                icon: Utensils,
-              },
-              {
-                id: "02",
-                title: "Place Order",
-                desc: "Customize your meal. Add extra spicy sauce. Pay securely in seconds.",
-                icon: ShoppingBag,
-              },
-              {
-                id: "03",
-                title: "We Deliver",
-                desc: "Track your food in real-time. From the kitchen flame to your front door.",
-                icon: Truck,
-              },
-            ].map((step, index) => (
+            {steps.map((step, index) => (
               <motion.div
-                key={index}
+                key={step.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ margin: "-10%" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="flex flex-col justify-center h-auto md:h-screen pl-0 md:pl-20 mb-16 md:mb-0"
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.55, delay: index * 0.08 }}
+                className="flex flex-col justify-center h-auto md:h-screen pl-0 md:pl-16 mb-16 md:mb-0 md:pt-24 md:pb-12"
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="flex items-center justify-center w-12 h-12 rounded-full border border-zinc-200 bg-white text-zinc-500 font-bold text-sm shadow-sm">
+                <div className="flex items-center gap-4 mb-5">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-full border border-zinc-300 bg-white font-mono text-[11px] font-bold text-zinc-500">
                     {step.id}
                   </span>
-                  <span className="h-px w-20 bg-zinc-200" />
+                  <span className="h-px w-16 bg-zinc-300" />
                 </div>
-                <h3 className="text-4xl md:text-7xl font-black text-zinc-900 mb-6">
+
+                <h3
+                  className={cn(
+                    "font-black text-zinc-900 mb-4 max-w-xl",
+                    STEP_TITLE,
+                  )}
+                >
                   {step.title}
                 </h3>
-                <p className="text-lg md:text-xl text-zinc-500 max-w-md leading-relaxed">
+
+                <p
+                  className={cn("text-zinc-600 max-w-md", STEP_BODY)}
+                >
                   {step.desc}
                 </p>
-                {/* Mobile Icon Visual */}
-                <div className="mt-8 md:hidden w-full h-48 bg-zinc-50 rounded-3xl border border-zinc-100 flex items-center justify-center text-[#F2891C]">
-                  <step.icon size={48} />
+
+                {/* Mobile: the real screen, not a grey box with an icon */}
+                <div className="mt-7 md:hidden flex justify-center">
+                  <TabletFrame className="w-[230px] h-[380px]">
+                    <step.Screen />
+                  </TabletFrame>
                 </div>
               </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* ── Closing line ──────────────────────────────────────────── */}
+        <div className="md:col-span-2 pb-4 md:pb-24 text-center md:text-left md:pl-16">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">
+            Sixty days free · No card · Cancel any time
+          </p>
         </div>
       </div>
     </section>
