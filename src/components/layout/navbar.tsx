@@ -19,6 +19,13 @@ export function Navbar() {
     { name: "FAQ", href: "/#faq" },
   ];
 
+  // The CTA points at the enquiry form. Vendors are the customer who pays,
+  // so the most prominent button on the site must lead to a vendor action.
+  // The previous "Order Now" button had no handler and no href at all — it
+  // was the loudest element on the page and did nothing when tapped.
+  const CTA_HREF = "/#contact";
+  const CTA_LABEL = "Get ChopQik";
+
   return (
     <>
       <motion.div
@@ -56,15 +63,17 @@ export function Navbar() {
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-3 shrink-0">
             <Button
+              asChild
               size="sm"
               className="rounded-full bg-[#F2891C] hover:bg-[#F2891C]/90 text-white px-6 shadow-lg shadow-[#F2891C]/20 font-bold"
             >
-              Order Now
+              <Link href={CTA_HREF}>{CTA_LABEL}</Link>
             </Button>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -108,10 +117,16 @@ export function Navbar() {
                 ))}
                 <div className="h-px bg-white/10 my-2" />
                 <Button
+                  asChild
                   size="lg"
                   className="w-full rounded-xl bg-[#F2891C] hover:bg-[#F2891C]/90 text-white font-bold"
                 >
-                  Order Now
+                  <Link
+                    href={CTA_HREF}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {CTA_LABEL}
+                  </Link>
                 </Button>
               </div>
             </motion.div>
