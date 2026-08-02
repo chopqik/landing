@@ -22,6 +22,20 @@ body {
 
 html {
   scroll-behavior: smooth;
+
+  /* The navbar is fixed at top-6 and roughly 62px tall. Without this, every
+     anchor jump puts the section's first line behind it — click FAQ and the
+     heading lands under the pill. 7rem clears the bar plus a little air. */
+  scroll-padding-top: 7rem;
+}
+
+/* Smooth scrolling plus a nav that jumps a full page height can cause
+   nausea for people with vestibular sensitivity. This is what the setting
+   is for. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Custom Utilities for Background Patterns */
