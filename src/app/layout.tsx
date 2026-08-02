@@ -46,9 +46,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        // TODO: replace with a dashboard screenshot at 1200x630. This image is
-        // what appears on every WhatsApp, LinkedIn and X link preview — for a
-        // software product the dashboard sells better than a logo.
+        // TODO: this file does not exist yet. Until it does, every WhatsApp,
+        // LinkedIn and X share of chopqik.com shows a blank preview box.
+        // Needs one 1200x630 image in /public — a dashboard screenshot on the
+        // charcoal background, not the logo.
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
@@ -91,8 +92,11 @@ export const metadata: Metadata = {
 // sold to restaurants, and the schema has to say so or the copy on the page
 // and the machine-readable description of the company disagree.
 //
-// No telephone number is published. The previous one was a placeholder that
-// does not connect. Add a real one here when there is a number that answers.
+// The telephone number is the ChopQik support line, the same one printed in
+// the vendor dashboard footer. It answers on WhatsApp.
+const SUPPORT_PHONE = "+2348063588816";
+const SUPPORT_EMAIL = "support@chopqik.com";
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -122,11 +126,21 @@ const jsonLd = {
     "@type": "Organization",
     name: "ChopQik LTD",
     url: "https://chopqik.com",
+    telephone: SUPPORT_PHONE,
+    email: SUPPORT_EMAIL,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Benin City",
       addressRegion: "Edo",
       addressCountry: "NG",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      telephone: SUPPORT_PHONE,
+      email: SUPPORT_EMAIL,
+      areaServed: "NG",
+      availableLanguage: ["English"],
     },
   },
   areaServed: {
