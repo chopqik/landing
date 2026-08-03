@@ -1,30 +1,60 @@
 "use client";
 
-import { APP_LINKS } from "@/constants/links";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+// This used to be a full-width "Join the Waitlist" bar pointing at the
+// delivery Google Form — the most prominent element on mobile, fixed to the
+// bottom of every page, permanently visible. A restaurant owner reading
+// about a ₦30,000/month operating system had a large orange bar following
+// them down the page offering to sign them up for food delivery.
+//
+// It is now WhatsApp. On a phone that is one tap into a conversation, on
+// the channel this market actually uses, and it reaches a line that is
+// answered.
+//
+// It also no longer appears immediately. The old version faded in after one
+// second and then sat over the bottom of every section for the rest of the
+// visit, including on top of the hero's own call to action. It now waits
+// until the reader has scrolled past the first screen.
+//
+// The filename and export name are unchanged so layout.tsx needs no edit.
+
+import * as React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageCircle } from "lucide-react";
+
+const SUPPORT_WA = "2348063588816";
 
 export function MobileWaitlistButton() {
+  const [show, setShow] = React.useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.9);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1, duration: 0.6, ease: "easeOut" }}
-      className="fixed bottom-6 left-4 right-4 z-100 md:hidden pointer-events-none"
-    >
-      <a
-        href={APP_LINKS.waitList}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="pointer-events-auto group relative flex h-14 w-full items-center justify-center gap-3 rounded-full bg-[#F2891C] px-8 text-lg font-bold text-white shadow-2xl shadow-[#F2891C]/30 transition-all hover:bg-orange-600 active:scale-95"
-      >
-        <span className="relative z-10 flex items-center gap-2">
-          Join the Waitlist
-          <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-        </span>
-        {/* Subtle persistent pulse effect on the button background */}
-        <span className="absolute inset-0 rounded-full border-2 border-white/20 scale-100 opacity-0 group-active:opacity-100 group-active:scale-105 transition-all duration-300" />
-      </a>
-    </motion.div>
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 40 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="fixed bottom-4 left-4 right-4 z-50 md:hidden pointer-events-none"
+          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        >
+          <a
+            href={`https://wa.me/${SUPPORT_WA}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pointer-events-auto flex h-13 w-full items-center justify-center gap-2.5 rounded-full bg-[#F2891C] py-4 text-base font-bold text-black shadow-2xl shadow-black/40 active:scale-[0.98] transition-transform"
+          >
+            <MessageCircle className="h-5 w-5" />
+            Message us on WhatsApp
+          </a>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
