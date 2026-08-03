@@ -6,11 +6,17 @@ import { Quote } from "lucide-react";
 // Real quotes from live ChopQik vendors in Benin City, used with permission.
 // Do not add a testimonial here that has not been said and approved by the
 // business named. Three real ones outperform any number of invented ones.
+//
+// The hotel is deliberately unnamed. The quote is theirs and it is the
+// strongest line on the site, but it is a named business publicly stating
+// that its own staff were stealing. The words carry just as well without
+// exposing the vendor who trusted us with them.
 const testimonials = [
   {
-    name: "Fransil Hills Hotel",
-    role: "Hotel restaurant & bar",
+    name: "A hotel in Benin City",
+    role: "Restaurant & bar",
     content: "It is reducing theft in the hotel kitchen. Thank you.",
+    initial: "H",
   },
   {
     name: "Madam Ofejiro",
@@ -29,7 +35,7 @@ export function Testimonials_Marquee() {
   return (
     <section
       id="reviews"
-      className="py-16 md:py-24 bg-zinc-50 overflow-hidden relative border-y border-zinc-100"
+      className="py-16 md:py-24 bg-zinc-50 overflow-hidden relative border-y border-zinc-100 scroll-mt-28"
     >
       <div className="container mx-auto px-4 mb-12 md:mb-16 text-center">
         <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 md:mb-6">
@@ -59,7 +65,16 @@ export function Testimonials_Marquee() {
   );
 }
 
-function Card({ item }: { item: (typeof testimonials)[0] }) {
+function Card({
+  item,
+}: {
+  item: { name: string; role: string; content: string; initial?: string };
+}) {
+  // Falls back to the first letter of the name, except where a testimonial
+  // is anonymised — "A hotel in Benin City" would otherwise show a bare "A",
+  // which reads like a person's initial.
+  const badge = item.initial ?? item.name[0];
+
   return (
     <div className="h-full flex flex-col bg-white border border-zinc-100 p-6 md:p-7 rounded-2xl shadow-sm hover:shadow-md hover:border-[#F2891C]/30 transition-all group">
       <div className="flex justify-end mb-4">
@@ -74,7 +89,7 @@ function Card({ item }: { item: (typeof testimonials)[0] }) {
 
       <div className="flex items-center gap-3 border-t border-zinc-100 pt-4">
         <div className="w-10 h-10 bg-[#F2891C]/10 rounded-full flex items-center justify-center text-sm font-black text-[#F2891C] shrink-0">
-          {item.name[0]}
+          {badge}
         </div>
         <div>
           <div className="text-sm font-bold text-zinc-900">{item.name}</div>
