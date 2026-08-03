@@ -87,12 +87,12 @@ export function Footer() {
               />
               <SocialIcon
                 icon={Facebook}
-                href="https://www.facebook.com/share/1FGEjVQRCD/?mibextid=wwXIfr"
+                href="https://www.facebook.com/chopqik"
                 label="ChopQik on Facebook"
               />
               <SocialIcon
                 icon={Music2}
-                href="https://www.tiktok.com/@chopkwik_"
+                href="https://www.tiktok.com/@chopqik"
                 label="ChopQik on TikTok"
               />
             </div>
