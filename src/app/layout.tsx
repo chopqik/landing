@@ -24,7 +24,13 @@ export const metadata: Metadata = {
   // Without this, Next.js resolves og:image against http://localhost:3000 and
   // every link preview on WhatsApp, LinkedIn and X silently fails. The build
   // warns about it on every run.
-  metadataBase: new URL("https://chopqik.com"),
+  //
+  // This MUST be the www host. The apex 308s to www.chopqik.com, so an apex
+  // metadataBase makes every absolute URL Next generates — og:image,
+  // twitter:image, canonical — a redirect. Facebook follows those; LinkedIn
+  // is unreliable about it. Verify with:
+  //   curl -sI https://chopqik.com | grep -i "^location"
+  metadataBase: new URL("https://www.chopqik.com"),
   title: "ChopQik | The Operating System for Nigerian Restaurants",
   description:
     "ChopQik runs the whole floor for restaurants, bars and hotels — orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee, no commission on any sale. Live in Benin City.",
@@ -44,17 +50,22 @@ export const metadata: Metadata = {
     title: "ChopQik | The Operating System for Nigerian Restaurants",
     description:
       "Orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee. No commission on a single sale, ever.",
-    url: "https://chopqik.com",
+    url: "https://www.chopqik.com",
     siteName: "ChopQik",
     locale: "en_NG",
     type: "website",
     images: [
       {
         // 1200x630 card generated from the brand mark and the real order
-        // ticket UI. Lives at public/og-image.jpg. Regenerate it whenever
+        // ticket UI. Lives at public/og-image-v2.jpg. Regenerate it whenever
         // the pricing or the headline changes — it is the first thing
         // anyone sees when this link is shared.
-        url: "/og-image.jpg",
+        //
+        // Bump the filename on every regeneration. Facebook, LinkedIn and
+        // WhatsApp cache share images by URL, so replacing the file in place
+        // serves the old card indefinitely. public/og-image.jpg is the
+        // superseded v1 — left in place because existing shares point at it.
+        url: "/og-image-v2.jpg",
         width: 1200,
         height: 630,
         alt: "The ChopQik vendor dashboard",
@@ -79,7 +90,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://chopqik.com",
+    canonical: "https://www.chopqik.com",
   },
   icons: {
     icon: "/favicon.ico",
@@ -107,8 +118,8 @@ const jsonLd = {
   name: "ChopQik",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web browser",
-  url: "https://chopqik.com",
-  image: "https://chopqik.com/images/CHOP_Q_white_and_orange.png",
+  url: "https://www.chopqik.com",
+  image: "https://www.chopqik.com/images/CHOP_Q_white_and_orange.png",
   description:
     "An operating system for food and hospitality businesses in Nigeria. Orders, inventory, staff, reservations, catering, analytics and daily takings in one dashboard, with QR ordering for guests.",
   featureList: [
@@ -129,7 +140,7 @@ const jsonLd = {
   publisher: {
     "@type": "Organization",
     name: "ChopQik LTD",
-    url: "https://chopqik.com",
+    url: "https://www.chopqik.com",
     telephone: SUPPORT_PHONE,
     email: SUPPORT_EMAIL,
     address: {
