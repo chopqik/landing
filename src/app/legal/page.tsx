@@ -5,7 +5,7 @@ import { LegalSidebar } from "@/components/legal/legal-sidebar";
 export const metadata = {
   title: "Legal Hub - ChopQik",
   description:
-    "Terms, privacy, and policy documents for customers, partners, and delivery partners on ChopQik.",
+    "Terms, privacy, and policy documents for customers and vendors on ChopQik.",
 };
 
 export default function LegalPage() {
@@ -13,8 +13,6 @@ export default function LegalPage() {
     { id: "terms-of-service", label: "Terms of Service" },
     { id: "privacy-policy", label: "Privacy Policy" },
     { id: "cookie-policy", label: "Cookie Policy" },
-    { id: "partner-agreement", label: "Partner Agreement" },
-    { id: "delivery-partner-agreement", label: "Delivery Partner Agreement" },
     {
       id: "acceptable-use-community-guidelines",
       label: "Acceptable Use and Community Guidelines",
@@ -38,6 +36,18 @@ export default function LegalPage() {
     { id: "supplier-code-of-conduct", label: "Supplier Code of Conduct" },
     { id: "whistleblower-policy", label: "Whistleblower Policy" },
     { id: "service-fee-breakdown", label: "Service Fee Breakdown" },
+    {
+      id: "courier-service-provider-agreement",
+      label: "Courier Service Provider Agreement (Phase 4 — not in effect)",
+    },
+    {
+      id: "partner-agreement",
+      label: "Delivery Partner Agreement — Vendors (Phase 4 — not in effect)",
+    },
+    {
+      id: "delivery-partner-agreement",
+      label: "Delivery Partner Agreement — Riders (Phase 4 — not in effect)",
+    },
     {
       id: "physical-address-contact-information",
       label: "Physical Address and Contact Information",
@@ -68,14 +78,21 @@ export default function LegalPage() {
               Legal Hub
             </h1>
             <p className="lead text-xl text-zinc-500 mb-8">
-              Last updated: March 2026
+              Last updated: August 2026
             </p>
 
             <div className="not-prose mb-10 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:p-6">
               <p className="text-sm md:text-base text-zinc-700 leading-relaxed m-0">
-                This page contains ChopQik&apos;s customer, partner, courier,
-                and compliance policies in one place. Use the section index on
-                the left to jump to a specific document.
+                This page contains ChopQik&apos;s customer and compliance
+                policies in one place. Use the section index on the left to jump
+                to a specific document. Vendors on the platform are governed by
+                their signed Vendor Service Agreement together with the policies
+                at{" "}
+                <a href="https://vendors.chopqik.com/policies">
+                  vendors.chopqik.com/policies
+                </a>
+                . Documents marked <em>Phase 4</em> relate to a delivery network
+                ChopQik has not launched and are not in effect.
               </p>
             </div>
 
@@ -87,12 +104,15 @@ export default function LegalPage() {
             </p>
             <h3>1. Introduction and Acceptance</h3>
             <p>
-              ChopQik Ltd. operates an online platform that connects customers
-              with independent restaurants, street food vendors, grocery stores,
-              and other retailers (&quot;Partners&quot;) and arranges delivery
-              through independent couriers (&quot;Delivery Partners&quot;). Our
-              role is limited to providing the technology that facilitates
-              orders; we do not own, prepare, or deliver the goods.
+              ChopQik Ltd. provides software that independent restaurants,
+              bars, hotels, and other food and retail businesses
+              (&quot;Vendors&quot;) use to run their operations and to take
+              orders from their own customers. When you place an order through a
+              Vendor&apos;s ordering page you are buying from that Vendor, not
+              from ChopQik. The Vendor sets its own prices, prepares the goods,
+              and arranges any delivery itself. ChopQik does not own, prepare,
+              deliver, or sell the goods, and does not employ riders or delivery
+              personnel.
             </p>
             <p>
               By accessing or using our website or mobile application (the
@@ -169,20 +189,22 @@ export default function LegalPage() {
             </p>
             <p>
               <strong>Pricing and Fees.</strong> Prices displayed on the
-              Platform are set by Partners and may include applicable taxes.
-              ChopQik may charge additional fees - such as service fees,
-              delivery fees, small-order fees, or regulatory fees - to maintain
-              and improve our services. We will disclose all applicable fees at
-              checkout before you confirm your order. Fee changes will take
-              effect upon posting on the Platform. We will notify you of
-              material fee changes via the app or email, and your continued use
-              of the Platform after such changes constitutes acceptance.
+              Platform are set by the Vendor and may include applicable taxes.
+              Where a Vendor charges for packaging or for delivery, that charge
+              is set by the Vendor and shown before you confirm your order.
+              Orders paid online attract a payment processing fee, displayed
+              before checkout, which covers payment processing charges and
+              platform costs. All applicable charges are disclosed at checkout
+              before you confirm your order.
             </p>
             <p>
               <strong>Payment.</strong> Payment must be made using the methods
               available on the Platform (e.g., credit/debit card, mobile wallet,
-              bank transfer). Payments are processed by third-party payment
-              processors acting on behalf of Partners and Delivery Partners. By
+              bank transfer). Online payments are processed by Paystack, a
+              CBN-licensed payment processor, and settle directly to the
+              Vendor&apos;s own designated bank account through a dedicated
+              subaccount in the Vendor&apos;s name. ChopQik does not hold,
+              control, or delay the Vendor&apos;s order funds at any time. By
               submitting payment information you authorise us and our payment
               processors to charge your selected payment method for the total
               amount (including taxes and fees). You agree that our payment
@@ -192,61 +214,17 @@ export default function LegalPage() {
 
             <h3>5. Delivery and Logistics</h3>
             <p>
-              ChopQik coordinates deliveries with independent Delivery Partners.
-              Estimated delivery times provided on the Platform are for
-              convenience only and may vary due to traffic, weather, or Partner
-              preparation times. You must provide an accurate delivery address
-              and be available to receive the order; failure to do so may result
-              in forfeiture of the goods and fees paid. Delivery Partners are
-              independent contractors, not employees of ChopQik, and are solely
-              responsible for complying with road traffic laws and ensuring
-              their vehicles are in safe working condition.
+              ChopQik does not operate a delivery service and does not employ
+              riders or delivery personnel. Where a Vendor offers delivery, that
+              Vendor is solely responsible for arranging and completing it,
+              using its own staff, riders, or a third party of its choosing.
+              Delivery areas, times, and charges are set by each Vendor
+              independently. Any times shown on the Platform are estimates given
+              by the Vendor and may vary. You must provide an accurate delivery
+              address and be available to receive the order. For any question
+              about a delivery, contact the Vendor directly using the details
+              shown on its ordering page.
             </p>
-            <h3>Courier Service Provider Agreement</h3>
-            <p>
-              <strong>Relationship.</strong> ChopQik may partner with
-              independent courier service companies (&quot;Service
-              Providers&quot;) to supplement delivery capacity. Service
-              Providers are independent businesses that employ or engage their
-              own delivery personnel.
-            </p>
-            <p>
-              <strong>Service Provider Obligations.</strong> Service Providers
-              agree to: ensure all their personnel meet the requirements set
-              forth in ChopQik&apos;s Delivery Partner Agreement (age 18+, valid
-              licence, insurance); maintain comprehensive third-party liability
-              insurance for all vehicles and personnel; assume full
-              responsibility for the acts and omissions of their personnel;
-              comply with all Nigerian labour laws regarding their employees or
-              contractors; and indemnify ChopQik for any claims arising from
-              their personnel&apos;s conduct.
-            </p>
-            <p>
-              <strong>No Vicarious Liability.</strong> ChopQik shall not be
-              liable for any acts, omissions, or misconduct of Service Provider
-              personnel. The Service Provider agrees to defend and indemnify
-              ChopQik against any claims seeking to impose liability on ChopQik
-              for actions of Service Provider personnel.
-            </p>
-            <p>
-              <strong>Insurance Requirements.</strong> Service Providers must
-              maintain at their sole expense: (a) comprehensive third-party
-              motor insurance for all vehicles; (b) public liability insurance
-              with minimum coverage of &#8358;5,000,000 (Five Million Naira);
-              and (c) workers&apos; compensation insurance for employees where
-              applicable under the Employee&apos;s Compensation Act 2010.
-            </p>
-            <p>
-              <strong>Quality Standards.</strong> Service Providers must ensure
-              personnel comply with ChopQik&apos;s delivery standards, including
-              use of thermal bags, phone mounts, and professional conduct.
-            </p>
-            <p>
-              <strong>Termination.</strong> ChopQik may terminate any Service
-              Provider immediately upon notice for safety violations, repeated
-              customer complaints, or breach of this Agreement.
-            </p>
-
             <h3>6. User Conduct and Prohibited Activities</h3>
             <p>
               You agree to use the Platform in compliance with applicable laws
@@ -775,269 +753,6 @@ export default function LegalPage() {
               posted on our Platform with a revised effective date.
             </p>
 
-            <h2 id="partner-agreement" className="scroll-mt-36">
-              Partner Agreement (Restaurants, Grocery Stores and Shops)
-            </h2>
-            <p>
-              <strong>Last Updated:</strong> March 2026
-            </p>
-            <h3>1. Introduction and Definitions</h3>
-            <p>
-              This Partner Agreement (the &quot;Agreement&quot;) is between
-              ChopQik Ltd. (&quot;ChopQik&quot;) and the business entering into
-              this Agreement (&quot;Partner&quot; or &quot;you&quot;). ChopQik
-              operates a marketplace connecting Partners who sell food,
-              groceries, and retail goods (&quot;Products&quot;) with customers
-              and arranges delivery through independent couriers. Each Partner
-              is an independent business responsible for its goods and
-              operations.
-            </p>
-            <p>
-              <strong>Definitions:</strong>
-            </p>
-            <ul>
-              <li>
-                &quot;Platform&quot; means the ChopQik website, mobile
-                applications, and related technology services.
-              </li>
-              <li>
-                &quot;Partner Content&quot; means all menus, product
-                descriptions, prices, images, trademarks, and other materials
-                provided by Partner.
-              </li>
-            </ul>
-
-            <h3>2. Services Provided by ChopQik</h3>
-            <p>ChopQik will:</p>
-            <ul>
-              <li>
-                Provide access to the Platform for listing Partner&apos;s
-                Products and displaying Partner Content to customers.
-              </li>
-              <li>
-                Facilitate the placement of orders by customers and transmit
-                order details to the Partner.
-              </li>
-              <li>
-                Process payments from customers on Partner&apos;s behalf and
-                arrange settlement of amounts due to Partner, subject to the
-                commission and other fees described below.
-              </li>
-              <li>
-                Coordinate logistics with Delivery Partners to collect Products
-                from Partner&apos;s location and deliver them to customers.
-              </li>
-              <li>
-                Provide limited customer support and order-related assistance.
-              </li>
-            </ul>
-
-            <h3>3. Partner Obligations</h3>
-            <p>
-              The Partner acknowledges that ChopQik&apos;s performance depends
-              on Partner&apos;s timely and accurate performance. Partner agrees
-              to:
-            </p>
-            <p>
-              <strong>Accurate Information.</strong> Provide and maintain
-              accurate menus, product descriptions, prices, availability, and
-              images, including all required ingredient, allergen, and
-              nutritional information. Provide descriptions in plain and
-              understandable language, as the FCCPA requires that consumers have
-              the right to information about goods in plain language.
-            </p>
-            <p>
-              <strong>Food Safety and Quality.</strong> Prepare and package
-              Products in a clean and sanitary manner in accordance with food
-              safety laws, including listing allergens and preventing
-              cross-contamination (see Food Safety and Allergy Policy). Partner
-              is solely responsible for the quality and safety of Products.
-            </p>
-            <p>
-              <strong>Licences and Compliance.</strong> Maintain all licences,
-              permits, and certifications required for operating the business
-              and selling the Products. Comply with all applicable laws
-              (including food, health, safety, consumer, and tax laws).
-            </p>
-            <p>
-              <strong>Order Fulfilment.</strong> Accept or reject orders
-              promptly. Once an order is accepted, fulfil it in a timely manner
-              and ensure that Products are available and packaged properly for
-              pickup by Delivery Partners.
-            </p>
-            <p>
-              <strong>Customer Service and Complaints.</strong> Handle customer
-              inquiries, complaints, cancellations, and refund requests in
-              accordance with applicable law and cooperate with ChopQik in
-              resolving disputes.
-            </p>
-            <p>
-              <strong>Equipment.</strong> Use any tablets, printers, or other
-              equipment provided by ChopQik for order management only, maintain
-              the equipment in good condition, and return it upon request or
-              termination.
-            </p>
-            <p>
-              <strong>Confidentiality.</strong> Protect ChopQik&apos;s
-              confidential information, including non-public data about our
-              business, customers, and technology. This obligation survives
-              termination of this Agreement.
-            </p>
-            <p>
-              <strong>Data Protection.</strong> Comply with the NDPA 2023 and
-              NDPR with respect to any personal data received through the
-              Platform. Partner shall not use customer personal data for any
-              purpose other than fulfilling orders placed through the Platform.
-            </p>
-
-            <h3>4. Fees and Payouts</h3>
-            <p>
-              <strong>Commission.</strong> Partner will pay ChopQik a commission
-              on each order, calculated as a percentage of the Product price.
-              The applicable commission rates are agreed during onboarding and
-              documented in the onboarding schedule, and may vary by category or
-              promotion.
-            </p>
-            <p>
-              <strong>Payment Processing.</strong> After each settlement period
-              (e.g., weekly), ChopQik will aggregate amounts collected for
-              Partner&apos;s orders (the &quot;Collected Revenues&quot;) and
-              deduct the commission fee and any other applicable fees (e.g.,
-              payment processing fees, small-order fees, promotional fees).
-            </p>
-            <p>
-              <strong>Payout.</strong> ChopQik will remit the remaining amount
-              to Partner&apos;s designated bank account within the period
-              specified in the onboarding schedule after the end of the
-              settlement period. We will provide statements showing orders,
-              fees, and payouts.
-            </p>
-            <p>
-              <strong>Taxes.</strong> Partner is the seller of record and is
-              responsible for all applicable taxes on the sale of Products,
-              including Value Added Tax (VAT) where applicable. Partner agrees
-              to indemnify ChopQik from any tax liabilities relating to
-              Partner&apos;s Products.
-            </p>
-
-            <h3>5. Intellectual Property</h3>
-            <p>
-              <strong>Partner Ownership.</strong> Partner retains all rights in
-              its trademarks, menus, and other Partner Content.
-            </p>
-            <p>
-              <strong>Licence to ChopQik.</strong> Partner grants ChopQik a
-              non-exclusive, royalty-free licence to use, display, reproduce,
-              distribute, and modify Partner Content solely as necessary to
-              provide the services and promote the Products on the Platform.
-              ChopQik will comply with any brand guidelines provided by Partner.
-              This licence terminates upon termination of this Agreement, except
-              as necessary to fulfil outstanding orders.
-            </p>
-            <p>
-              <strong>Feedback.</strong> ChopQik may use and incorporate any
-              feedback or suggestions provided by Partner without obligation or
-              compensation.
-            </p>
-
-            <h3>6. Relationship of the Parties</h3>
-            <p>
-              Partner and ChopQik are independent contractors. Nothing in this
-              Agreement creates an employment, agency, joint venture, or
-              partnership relationship. Partner has no authority to bind ChopQik
-              and vice versa. Delivery Partners are also independent contractors
-              and not employees or agents of ChopQik.
-            </p>
-
-            <h3>7. Liability and Indemnification</h3>
-            <p>
-              <strong>Partner Liability.</strong> Partner is solely responsible
-              for the Products it sells, including quality, safety, and
-              regulatory compliance. Partner will defend and indemnify ChopQik
-              and its affiliates against any claims, damages, or losses arising
-              from (a) Partner&apos;s Products or content; (b) Partner&apos;s
-              breach of this Agreement; or (c) Partner&apos;s failure to comply
-              with applicable laws or regulations.
-            </p>
-            <p>
-              <strong>ChopQik Liability.</strong> ChopQik&apos;s aggregate
-              liability under this Agreement is limited to the amount of
-              commission fees paid by Partner in the six (6) months preceding
-              the event giving rise to the claim. ChopQik will not be liable for
-              lost profits, consequential, or special damages.
-            </p>
-
-            <h3>8. Term and Termination</h3>
-            <p>
-              <strong>Term.</strong> This Agreement commences when Partner
-              accepts it and continues until terminated by either party. Either
-              party may terminate for convenience with thirty (30) days&apos;
-              written notice.
-            </p>
-            <p>
-              <strong>Termination for Cause.</strong> Either party may terminate
-              immediately if the other materially breaches this Agreement and
-              fails to cure the breach within thirty (30) days after receiving
-              written notice. Either party may also terminate if the other
-              becomes insolvent or files for bankruptcy.
-            </p>
-            <p>
-              <strong>Effect of Termination.</strong> Upon termination, ChopQik
-              will remit any amounts due for orders fulfilled before the
-              termination date, less applicable fees. Each party will return or
-              securely destroy the other&apos;s confidential information.
-              Provisions that by their nature should survive termination
-              (confidentiality, data protection, intellectual property,
-              liability, dispute resolution) will remain in effect.
-            </p>
-
-            <h3>9. Governing Law and Dispute Resolution</h3>
-            <p>
-              This Agreement is governed by Nigerian law. Disputes shall be
-              resolved in accordance with the dispute resolution provisions set
-              forth in the Terms of Service.
-            </p>
-
-            <h3>10. Miscellaneous</h3>
-            <p>
-              This Agreement constitutes the entire understanding between the
-              parties and supersedes all prior agreements on its subject matter.
-              ChopQik may update this Agreement by providing at least fourteen
-              (14) days&apos; notice through the Partner portal or email;
-              Partner&apos;s continued use of the Platform after updates
-              constitutes acceptance. Neither party may assign this Agreement
-              without the other&apos;s written consent, except that ChopQik may
-              assign to an affiliate or successor. If any provision of this
-              Agreement is held to be unenforceable, the remaining provisions
-              shall continue in full force and effect.
-            </p>
-
-            <h2 id="delivery-partner-agreement" className="scroll-mt-36">
-              Delivery Partner Agreement
-            </h2>
-            <p>
-              Delivery Partners are independent contractors, not employees. They
-              control how deliveries are performed, may accept or reject
-              opportunities, and must comply with applicable legal and safety
-              obligations.
-            </p>
-            <ul>
-              <li>
-                Minimum age 18 with valid Nigerian license or rider permit.
-              </li>
-              <li>
-                Roadworthy vehicle, phone mount, thermal bag, and
-                internet-enabled phone.
-              </li>
-              <li>
-                Comprehensive third-party insurance maintained at own cost.
-              </li>
-              <li>
-                Tax reporting and payment obligations are the delivery partner’s
-                responsibility.
-              </li>
-            </ul>
-
             <h2
               id="acceptable-use-community-guidelines"
               className="scroll-mt-36"
@@ -1525,25 +1240,25 @@ export default function LegalPage() {
             </p>
             <ul>
               <li>
-                <strong>Partner Price:</strong> The price set by the Partner for
+                <strong>Vendor Price:</strong> The price set by the Vendor for
                 the item.
               </li>
               <li>
-                <strong>Service Fee:</strong> A percentage of the item price
-                that helps cover the cost of operating and improving the
-                Platform, including maintaining technology infrastructure and
-                providing customer support. The applicable service fee rate is
-                displayed at checkout.
+                <strong>Packaging:</strong> Where the Vendor charges separately
+                for packaging on takeaway and delivery orders, the amount is set
+                by the Vendor and shown before you confirm.
               </li>
               <li>
-                <strong>Delivery Fee:</strong> A fee paid to Delivery Partners
-                to compensate them for transportation and time. Delivery fees
-                vary based on distance, time of day, and demand.
+                <strong>Delivery Charge:</strong> Where the Vendor offers
+                delivery and charges for it, the amount is set by that Vendor
+                and shown before you confirm. ChopQik does not set or take any
+                part of it.
               </li>
               <li>
-                <strong>Small Order Fee:</strong> A fee that may be applied to
-                orders below a specified minimum to help cover the cost of
-                fulfilment.
+                <strong>Payment Processing Fee:</strong> Applied to orders paid
+                online and displayed before checkout. It covers payment
+                processing charges, including those levied by Paystack, and
+                platform costs.
               </li>
               <li>
                 <strong>Taxes:</strong> Applicable Value Added Tax (VAT) or
@@ -1556,6 +1271,340 @@ export default function LegalPage() {
               before placing your order. ChopQik reserves the right to modify
               fee structures with prior notice to users.
             </p>
+
+            {/* ─────────────────────────────────────────────────────────────
+                PHASE 4 — DELIVERY NETWORK. Draft terms, not yet in effect.
+                Everything below this marker governs a delivery network ChopQik
+                has not launched. It binds nobody today. Vendors on the platform
+                are governed by their signed Vendor Service Agreement and the
+                policies at vendors.chopqik.com/policies — flat subscription,
+                no commission. Do not merge this block back into the live
+                sections above.
+               ───────────────────────────────────────────────────────────── */}
+            <div className="not-prose mt-16 mb-8 rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50 p-5 md:p-6">
+              <p className="text-xs font-bold uppercase tracking-wide text-amber-700 m-0">
+                Future services &mdash; not yet in effect
+              </p>
+              <p className="mt-2 text-sm md:text-base text-zinc-700 leading-relaxed m-0">
+                The documents in this section govern ChopQik&apos;s planned delivery
+                network. They are published in draft for transparency and take effect
+                only when a party signs an agreement that refers to them. They create
+                no obligation for anyone using ChopQik today. Vendors currently on the
+                platform are governed by their signed Vendor Service Agreement and the
+                policies at{" "}
+                <a href="https://vendors.chopqik.com/policies">vendors.chopqik.com/policies</a>:
+                a flat monthly subscription with no commission on their orders.
+              </p>
+            </div>
+            <h2 id="courier-service-provider-agreement" className="scroll-mt-36">
+              Courier Service Provider Agreement
+            </h2>
+            <p>
+              <strong>Relationship.</strong> ChopQik may partner with
+              independent courier service companies (&quot;Service
+              Providers&quot;) to supplement delivery capacity. Service
+              Providers are independent businesses that employ or engage their
+              own delivery personnel.
+            </p>
+            <p>
+              <strong>Service Provider Obligations.</strong> Service Providers
+              agree to: ensure all their personnel meet the requirements set
+              forth in ChopQik&apos;s Delivery Partner Agreement (age 18+, valid
+              licence, insurance); maintain comprehensive third-party liability
+              insurance for all vehicles and personnel; assume full
+              responsibility for the acts and omissions of their personnel;
+              comply with all Nigerian labour laws regarding their employees or
+              contractors; and indemnify ChopQik for any claims arising from
+              their personnel&apos;s conduct.
+            </p>
+            <p>
+              <strong>No Vicarious Liability.</strong> ChopQik shall not be
+              liable for any acts, omissions, or misconduct of Service Provider
+              personnel. The Service Provider agrees to defend and indemnify
+              ChopQik against any claims seeking to impose liability on ChopQik
+              for actions of Service Provider personnel.
+            </p>
+            <p>
+              <strong>Insurance Requirements.</strong> Service Providers must
+              maintain at their sole expense: (a) comprehensive third-party
+              motor insurance for all vehicles; (b) public liability insurance
+              with minimum coverage of &#8358;5,000,000 (Five Million Naira);
+              and (c) workers&apos; compensation insurance for employees where
+              applicable under the Employee&apos;s Compensation Act 2010.
+            </p>
+            <p>
+              <strong>Quality Standards.</strong> Service Providers must ensure
+              personnel comply with ChopQik&apos;s delivery standards, including
+              use of thermal bags, phone mounts, and professional conduct.
+            </p>
+            <p>
+              <strong>Termination.</strong> ChopQik may terminate any Service
+              Provider immediately upon notice for safety violations, repeated
+              customer complaints, or breach of this Agreement.
+            </p>
+
+            <h2 id="partner-agreement" className="scroll-mt-36">
+              Partner Agreement (Restaurants, Grocery Stores and Shops)
+            </h2>
+            <p>
+              <strong>Last Updated:</strong> March 2026
+            </p>
+            <h3>1. Introduction and Definitions</h3>
+            <p>
+              This Partner Agreement (the &quot;Agreement&quot;) is between
+              ChopQik Ltd. (&quot;ChopQik&quot;) and the business entering into
+              this Agreement (&quot;Partner&quot; or &quot;you&quot;). ChopQik
+              operates a marketplace connecting Partners who sell food,
+              groceries, and retail goods (&quot;Products&quot;) with customers
+              and arranges delivery through independent couriers. Each Partner
+              is an independent business responsible for its goods and
+              operations.
+            </p>
+            <p>
+              <strong>Definitions:</strong>
+            </p>
+            <ul>
+              <li>
+                &quot;Platform&quot; means the ChopQik website, mobile
+                applications, and related technology services.
+              </li>
+              <li>
+                &quot;Partner Content&quot; means all menus, product
+                descriptions, prices, images, trademarks, and other materials
+                provided by Partner.
+              </li>
+            </ul>
+
+            <h3>2. Services Provided by ChopQik</h3>
+            <p>ChopQik will:</p>
+            <ul>
+              <li>
+                Provide access to the Platform for listing Partner&apos;s
+                Products and displaying Partner Content to customers.
+              </li>
+              <li>
+                Facilitate the placement of orders by customers and transmit
+                order details to the Partner.
+              </li>
+              <li>
+                Process payments from customers on Partner&apos;s behalf and
+                arrange settlement of amounts due to Partner, subject to the
+                commission and other fees described below.
+              </li>
+              <li>
+                Coordinate logistics with Delivery Partners to collect Products
+                from Partner&apos;s location and deliver them to customers.
+              </li>
+              <li>
+                Provide limited customer support and order-related assistance.
+              </li>
+            </ul>
+
+            <h3>3. Partner Obligations</h3>
+            <p>
+              The Partner acknowledges that ChopQik&apos;s performance depends
+              on Partner&apos;s timely and accurate performance. Partner agrees
+              to:
+            </p>
+            <p>
+              <strong>Accurate Information.</strong> Provide and maintain
+              accurate menus, product descriptions, prices, availability, and
+              images, including all required ingredient, allergen, and
+              nutritional information. Provide descriptions in plain and
+              understandable language, as the FCCPA requires that consumers have
+              the right to information about goods in plain language.
+            </p>
+            <p>
+              <strong>Food Safety and Quality.</strong> Prepare and package
+              Products in a clean and sanitary manner in accordance with food
+              safety laws, including listing allergens and preventing
+              cross-contamination (see Food Safety and Allergy Policy). Partner
+              is solely responsible for the quality and safety of Products.
+            </p>
+            <p>
+              <strong>Licences and Compliance.</strong> Maintain all licences,
+              permits, and certifications required for operating the business
+              and selling the Products. Comply with all applicable laws
+              (including food, health, safety, consumer, and tax laws).
+            </p>
+            <p>
+              <strong>Order Fulfilment.</strong> Accept or reject orders
+              promptly. Once an order is accepted, fulfil it in a timely manner
+              and ensure that Products are available and packaged properly for
+              pickup by Delivery Partners.
+            </p>
+            <p>
+              <strong>Customer Service and Complaints.</strong> Handle customer
+              inquiries, complaints, cancellations, and refund requests in
+              accordance with applicable law and cooperate with ChopQik in
+              resolving disputes.
+            </p>
+            <p>
+              <strong>Equipment.</strong> Use any tablets, printers, or other
+              equipment provided by ChopQik for order management only, maintain
+              the equipment in good condition, and return it upon request or
+              termination.
+            </p>
+            <p>
+              <strong>Confidentiality.</strong> Protect ChopQik&apos;s
+              confidential information, including non-public data about our
+              business, customers, and technology. This obligation survives
+              termination of this Agreement.
+            </p>
+            <p>
+              <strong>Data Protection.</strong> Comply with the NDPA 2023 and
+              NDPR with respect to any personal data received through the
+              Platform. Partner shall not use customer personal data for any
+              purpose other than fulfilling orders placed through the Platform.
+            </p>
+
+            <h3>4. Fees and Payouts</h3>
+            <p>
+              <strong>Commission.</strong> Partner will pay ChopQik a commission
+              on each order, calculated as a percentage of the Product price.
+              The applicable commission rates are agreed during onboarding and
+              documented in the onboarding schedule, and may vary by category or
+              promotion.
+            </p>
+            <p>
+              <strong>Payment Processing.</strong> After each settlement period
+              (e.g., weekly), ChopQik will aggregate amounts collected for
+              Partner&apos;s orders (the &quot;Collected Revenues&quot;) and
+              deduct the commission fee and any other applicable fees (e.g.,
+              payment processing fees, small-order fees, promotional fees).
+            </p>
+            <p>
+              <strong>Payout.</strong> ChopQik will remit the remaining amount
+              to Partner&apos;s designated bank account within the period
+              specified in the onboarding schedule after the end of the
+              settlement period. We will provide statements showing orders,
+              fees, and payouts.
+            </p>
+            <p>
+              <strong>Taxes.</strong> Partner is the seller of record and is
+              responsible for all applicable taxes on the sale of Products,
+              including Value Added Tax (VAT) where applicable. Partner agrees
+              to indemnify ChopQik from any tax liabilities relating to
+              Partner&apos;s Products.
+            </p>
+
+            <h3>5. Intellectual Property</h3>
+            <p>
+              <strong>Partner Ownership.</strong> Partner retains all rights in
+              its trademarks, menus, and other Partner Content.
+            </p>
+            <p>
+              <strong>Licence to ChopQik.</strong> Partner grants ChopQik a
+              non-exclusive, royalty-free licence to use, display, reproduce,
+              distribute, and modify Partner Content solely as necessary to
+              provide the services and promote the Products on the Platform.
+              ChopQik will comply with any brand guidelines provided by Partner.
+              This licence terminates upon termination of this Agreement, except
+              as necessary to fulfil outstanding orders.
+            </p>
+            <p>
+              <strong>Feedback.</strong> ChopQik may use and incorporate any
+              feedback or suggestions provided by Partner without obligation or
+              compensation.
+            </p>
+
+            <h3>6. Relationship of the Parties</h3>
+            <p>
+              Partner and ChopQik are independent contractors. Nothing in this
+              Agreement creates an employment, agency, joint venture, or
+              partnership relationship. Partner has no authority to bind ChopQik
+              and vice versa. Delivery Partners are also independent contractors
+              and not employees or agents of ChopQik.
+            </p>
+
+            <h3>7. Liability and Indemnification</h3>
+            <p>
+              <strong>Partner Liability.</strong> Partner is solely responsible
+              for the Products it sells, including quality, safety, and
+              regulatory compliance. Partner will defend and indemnify ChopQik
+              and its affiliates against any claims, damages, or losses arising
+              from (a) Partner&apos;s Products or content; (b) Partner&apos;s
+              breach of this Agreement; or (c) Partner&apos;s failure to comply
+              with applicable laws or regulations.
+            </p>
+            <p>
+              <strong>ChopQik Liability.</strong> ChopQik&apos;s aggregate
+              liability under this Agreement is limited to the amount of
+              commission fees paid by Partner in the six (6) months preceding
+              the event giving rise to the claim. ChopQik will not be liable for
+              lost profits, consequential, or special damages.
+            </p>
+
+            <h3>8. Term and Termination</h3>
+            <p>
+              <strong>Term.</strong> This Agreement commences when Partner
+              accepts it and continues until terminated by either party. Either
+              party may terminate for convenience with thirty (30) days&apos;
+              written notice.
+            </p>
+            <p>
+              <strong>Termination for Cause.</strong> Either party may terminate
+              immediately if the other materially breaches this Agreement and
+              fails to cure the breach within thirty (30) days after receiving
+              written notice. Either party may also terminate if the other
+              becomes insolvent or files for bankruptcy.
+            </p>
+            <p>
+              <strong>Effect of Termination.</strong> Upon termination, ChopQik
+              will remit any amounts due for orders fulfilled before the
+              termination date, less applicable fees. Each party will return or
+              securely destroy the other&apos;s confidential information.
+              Provisions that by their nature should survive termination
+              (confidentiality, data protection, intellectual property,
+              liability, dispute resolution) will remain in effect.
+            </p>
+
+            <h3>9. Governing Law and Dispute Resolution</h3>
+            <p>
+              This Agreement is governed by Nigerian law. Disputes shall be
+              resolved in accordance with the dispute resolution provisions set
+              forth in the Terms of Service.
+            </p>
+
+            <h3>10. Miscellaneous</h3>
+            <p>
+              This Agreement constitutes the entire understanding between the
+              parties and supersedes all prior agreements on its subject matter.
+              ChopQik may update this Agreement by providing at least fourteen
+              (14) days&apos; notice through the Partner portal or email;
+              Partner&apos;s continued use of the Platform after updates
+              constitutes acceptance. Neither party may assign this Agreement
+              without the other&apos;s written consent, except that ChopQik may
+              assign to an affiliate or successor. If any provision of this
+              Agreement is held to be unenforceable, the remaining provisions
+              shall continue in full force and effect.
+            </p>
+
+            <h2 id="delivery-partner-agreement" className="scroll-mt-36">
+              Delivery Partner Agreement
+            </h2>
+            <p>
+              Delivery Partners are independent contractors, not employees. They
+              control how deliveries are performed, may accept or reject
+              opportunities, and must comply with applicable legal and safety
+              obligations.
+            </p>
+            <ul>
+              <li>
+                Minimum age 18 with valid Nigerian license or rider permit.
+              </li>
+              <li>
+                Roadworthy vehicle, phone mount, thermal bag, and
+                internet-enabled phone.
+              </li>
+              <li>
+                Comprehensive third-party insurance maintained at own cost.
+              </li>
+              <li>
+                Tax reporting and payment obligations are the delivery partner’s
+                responsibility.
+              </li>
+            </ul>
 
             <h2
               id="physical-address-contact-information"
