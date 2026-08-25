@@ -473,7 +473,7 @@ export function RealityScroll() {
                 </h2>
                 <p className={cn("text-zinc-400 mb-5 max-w-md", LEAD)}>
                   Orders, kitchen, stock, tables and books on one screen. Live
-                  in four kitchens in Benin City today.
+                  in five kitchens in Benin City today.
                 </p>
                 <div className="space-y-3">
                   {system.map((item, i) => (

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   // is unreliable about it. Verify with:
   //   curl -sI https://chopqik.com | grep -i "^location"
   metadataBase: new URL("https://www.chopqik.com"),
-  title: "ChopQik | The Operating System for Nigerian Restaurants",
+  title: "ChopQik | Restaurant, Bar & Hotel Operating System — Nigeria",
   description:
     "ChopQik runs the whole floor for restaurants, bars and hotels — orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee, no commission on any sale. Live in Benin City.",
   keywords: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "ChopQik LTD" }],
   openGraph: {
-    title: "ChopQik | The Operating System for Nigerian Restaurants",
+    title: "ChopQik | Restaurant, Bar & Hotel Operating System — Nigeria",
     description:
       "Orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee. No commission on a single sale, ever.",
     url: "https://www.chopqik.com",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ChopQik | The Operating System for Nigerian Restaurants",
+    title: "ChopQik | Restaurant, Bar & Hotel Operating System — Nigeria",
     description:
       "Orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee. No commission on a single sale, ever.",
   },

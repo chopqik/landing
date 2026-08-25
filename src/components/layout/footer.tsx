@@ -48,7 +48,11 @@ const legalLinks = [
   { name: "Terms of Service", href: "/legal#terms-of-service" },
   { name: "Privacy Policy", href: "/legal#privacy-policy" },
   { name: "Cookie Policy", href: "/legal#cookie-policy" },
-  { name: "Partner Agreement", href: "/legal#partner-agreement" },
+  // Partner Agreement removed 2026-08-22. That anchor now lands inside the
+  // Phase 4 block on /legal — a draft delivery agreement that is not in
+  // effect and binds nobody. Vendors are governed by their signed Vendor
+  // Service Agreement and the policies at vendors.chopqik.com/policies, so a
+  // footer link inviting anyone to read the draft as current terms is wrong.
 ];
 
 export function Footer() {
