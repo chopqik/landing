@@ -44,6 +44,16 @@ const productLinks = [
   { name: "Blog", href: "/#blog" },
 ];
 
+// Vertical landing pages. In the footer as well as the navbar because the
+// footer is where people look for a site map — and because a page nothing
+// links to reads to Google as one the site itself does not think matters.
+const audienceLinks = [
+  { name: "Hotels", href: "/for-hotels" },
+  { name: "Restaurants", href: "/for-restaurants" },
+  { name: "Bars & Lounges", href: "/for-bars-and-lounges" },
+  { name: "Online Kitchens", href: "/for-online-kitchens" },
+];
+
 const legalLinks = [
   { name: "Terms of Service", href: "/legal#terms-of-service" },
   { name: "Privacy Policy", href: "/legal#privacy-policy" },
@@ -61,7 +71,7 @@ export function Footer() {
   return (
     <footer className="bg-zinc-950 text-white pt-20 pb-10 border-t border-white/10 relative">
       <div className="container mx-auto px-5 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-14">
           {/* Brand */}
           <div className="space-y-5">
             <Link href="/" className="relative flex items-center shrink-0">
@@ -107,6 +117,23 @@ export function Footer() {
             <h4 className="font-bold text-base mb-5">Product</h4>
             <ul className="space-y-3 text-sm text-zinc-400">
               {productLinks.map((l) => (
+                <li key={l.name}>
+                  <Link
+                    href={l.href}
+                    className="hover:text-[#F2891C] transition-colors"
+                  >
+                    {l.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Who it's for */}
+          <div>
+            <h4 className="font-bold text-base mb-5">Who it&apos;s for</h4>
+            <ul className="space-y-3 text-sm text-zinc-400">
+              {audienceLinks.map((l) => (
                 <li key={l.name}>
                   <Link
                     href={l.href}
