@@ -17,6 +17,15 @@ const BASE = "https://www.chopqik.com";
 // warn you.
 const BLOG_POST_IDS = ["1", "2", "3"];
 
+// Vertical landing pages. Add a route here the day it ships, not later — an
+// unlisted page is one Google finds by accident or not at all.
+const VERTICALS = [
+  "for-hotels",
+  "for-restaurants",
+  "for-bars-and-lounges",
+  "for-online-kitchens",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
@@ -27,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
+    ...VERTICALS.map((slug) => ({
+      url: `${BASE}/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    })),
     {
       url: `${BASE}/legal`,
       lastModified: now,
