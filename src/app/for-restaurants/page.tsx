@@ -80,7 +80,7 @@ const content: VerticalContent = {
 
   closingHeading: "Live by the weekend.",
   closingBody:
-    "Send a photograph of your menu on WhatsApp and we enter every item, price and category for you. About an hour of training for your staff. Sixty days free, then ₦30,000 a month, flat — the same on ₦200,000 of sales as on ₦2,000,000.",
+    "Send a photograph of your menu on WhatsApp and we enter every item, price and category for you. About an hour of training for your staff. Sixty days free, then from ₦5,000 a month. Most restaurants run on Standard at ₦15,000 — flat, the same on ₦200,000 of sales as on ₦2,000,000, and no commission on a single order.",
 };
 
 export default function ForRestaurantsPage() {
