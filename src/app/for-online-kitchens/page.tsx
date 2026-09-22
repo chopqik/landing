@@ -79,7 +79,7 @@ const content: VerticalContent = {
 
   closingHeading: "Sixty days free. Then a flat fee, forever.",
   closingBody:
-    "₦30,000 a month whether you sell ₦200,000 or ₦2,000,000. Not a percentage, not per order. We build your menu from a photograph and you can be taking orders this week.",
+    "From ₦5,000 a month, and most online kitchens run on Standard at ₦15,000 — the same whether you sell ₦200,000 or ₦2,000,000. Not a percentage, not per order. We build your menu from a photograph and you can be taking orders this week.",
 };
 
 export default function ForOnlineKitchensPage() {
