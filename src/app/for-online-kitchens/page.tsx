@@ -4,7 +4,7 @@ import { VerticalPage, type VerticalContent } from "@/components/sections/vertic
 export const metadata: Metadata = {
   title: "Online Food Vendor & Cloud Kitchen Software Nigeria | ChopQik",
   description:
-    "Your own ordering page, online payments straight to your account, and no commission on any sale. Built for delivery-only kitchens and online food vendors in Nigeria.",
+    "Your own ordering page, online payments straight to your account, and a flat monthly fee with no commission on your own sales. Built for delivery-only kitchens and online food vendors in Nigeria.",
   keywords: [
     "Online food vendor software Nigeria",
     "Cloud kitchen software Nigeria",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Online Food Vendor & Cloud Kitchen Software | ChopQik",
     description:
-      "Your own ordering page and online payments straight to your account. No commission on a single sale.",
+      "Your own ordering page and online payments straight to your account, on a flat monthly fee.",
     url: "https://www.chopqik.com/for-online-kitchens",
   },
 };
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
 const content: VerticalContent = {
   eyebrow: "For online kitchens",
   headline: "Your own storefront.",
-  headlineAccent: "Nobody's cut.",
+  headlineAccent: "Your margin stays yours.",
   lead:
     "If you cook from a kitchen and sell through WhatsApp and Instagram, you already have the customers. What you do not have is a place to send them that takes the order properly, prices it, and puts the money in your account.",
 
   painHeading: "The cost of selling through other people.",
   pains: [
     {
-      title: "Marketplaces take a cut",
+      title: "Marketplace commission eats the margin",
       body: "Delivery commission in Nigeria runs as high as 24 percent. On food margins that is not a fee, that is the profit — and it is charged again next month, growing as you do.",
     },
     {
@@ -79,7 +79,7 @@ const content: VerticalContent = {
 
   closingHeading: "Sixty days free. Then a flat fee, forever.",
   closingBody:
-    "From ₦5,000 a month, and most online kitchens run on Standard at ₦15,000 — the same whether you sell ₦200,000 or ₦2,000,000. Not a percentage, not per order. We build your menu from a photograph and you can be taking orders this week.",
+    "From ₦5,000 a month, and most online kitchens run on Standard at ₦15,000. Your subscription is flat — not a percentage of your sales, not per order — the same whether you sell ₦200,000 or ₦2,000,000. We build your menu from a photograph and you can be taking orders this week.",
 };
 
 export default function ForOnlineKitchensPage() {
