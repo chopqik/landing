@@ -65,7 +65,9 @@ export const metadata: Metadata = {
         // WhatsApp cache share images by URL, so replacing the file in place
         // serves the old card indefinitely. public/og-image.jpg is the
         // superseded v1 — left in place because existing shares point at it.
-        url: "/og-image-v2.jpg",
+        // v3 (September 2026) replaced v2, which had "₦30,000 / MONTH" and
+        // "NO COMMISSION" printed across the bottom of the card.
+        url: "/og-image-v3.jpg",
         width: 1200,
         height: 630,
         alt: "The ChopQik vendor dashboard",
