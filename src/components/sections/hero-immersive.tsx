@@ -119,9 +119,9 @@ export function HeroImmersive({
           </p>
 
           <p className="max-w-2xl mx-auto text-base md:text-lg text-white/70 mb-10 leading-relaxed font-light">
-            One flat monthly fee.{" "}
+            Flat monthly plans from ₦5,000.{" "}
             <span className="text-white font-medium">
-              No commission on a single sale, ever.
+              No commission on your sales.
             </span>
           </p>
 

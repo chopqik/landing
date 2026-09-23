@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.chopqik.com"),
   title: "ChopQik | Restaurant, Bar & Hotel Operating System — Nigeria",
   description:
-    "ChopQik runs the whole floor for restaurants, bars and hotels — orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee, no commission on any sale. Live in Benin City.",
+    "ChopQik runs the whole floor for restaurants, bars and hotels — orders, stock, staff, reservations and daily takings on one screen. Flat monthly plans from ₦5,000, with no commission on your sales. Live in Benin City.",
   keywords: [
     "Restaurant POS Nigeria",
     "Restaurant management software Nigeria",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ChopQik | Restaurant, Bar & Hotel Operating System — Nigeria",
     description:
-      "Orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee. No commission on a single sale, ever.",
+      "Orders, stock, staff, reservations and daily takings on one screen. Flat monthly plans from ₦5,000, with no commission on your sales.",
     url: "https://www.chopqik.com",
     siteName: "ChopQik",
     locale: "en_NG",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ChopQik | Restaurant, Bar & Hotel Operating System — Nigeria",
     description:
-      "Orders, stock, staff, reservations and daily takings on one screen. One flat monthly fee. No commission on a single sale, ever.",
+      "Orders, stock, staff, reservations and daily takings on one screen. Flat monthly plans from ₦5,000, with no commission on your sales.",
   },
   robots: {
     index: true,
@@ -130,12 +130,17 @@ const jsonLd = {
     "Catering enquiries and estimates",
     "Daily takings and analytics",
   ],
+  // Three plans, so this is an AggregateOffer rather than a single Offer.
+  // A bare price of "30000" told Google the product costs ₦30,000 and
+  // nothing else — which is what rich results showed while Lite was ₦5,000.
   offers: {
-    "@type": "Offer",
-    price: "30000",
+    "@type": "AggregateOffer",
+    lowPrice: "5000",
+    highPrice: "30000",
+    offerCount: 3,
     priceCurrency: "NGN",
     description:
-      "Flat monthly subscription. No commission on vendor sales. 60-day free trial.",
+      "Flat monthly subscription from ₦5,000 (Lite), ₦15,000 (Standard) or ₦30,000 (Premium). No commission on vendor sales. 60-day free trial.",
   },
   publisher: {
     "@type": "Organization",

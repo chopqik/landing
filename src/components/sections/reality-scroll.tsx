@@ -86,8 +86,8 @@ const system = [
 const deal = [
   {
     icon: Percent,
-    title: "Zero commission. Ever.",
-    body: "Same price on ₦200,000 as on ₦2,000,000.",
+    title: "No cut of your sales",
+    body: "Your plan costs the same on ₦200,000 as on ₦2,000,000.",
   },
   {
     icon: ShieldCheck,
@@ -330,12 +330,13 @@ function PriceMock() {
             </p>
             <div className="flex items-baseline gap-2">
               <p className="font-mono text-2xl font-black text-zinc-50">
-                ₦30,000
+                ₦15,000
               </p>
               <span className="text-xs text-zinc-400">/ month</span>
             </div>
             <p className="text-[10px] text-zinc-400 mt-0.5">
-              The same ₦30,000 on ₦10,000,000. First sixty days free.
+              Standard, and the same on ₦10,000,000. Plans start at ₦5,000.
+              First sixty days free.
             </p>
           </div>
 
@@ -473,7 +474,7 @@ export function RealityScroll() {
                 </h2>
                 <p className={cn("text-zinc-400 mb-5 max-w-md", LEAD)}>
                   Orders, kitchen, stock, tables and books on one screen. Live
-                  in five kitchens in Benin City today.
+                  in kitchens in Benin City today.
                 </p>
                 <div className="space-y-3">
                   {system.map((item, i) => (
@@ -499,8 +500,8 @@ export function RealityScroll() {
                   <span className="text-[#F2891C]">your sales.</span>
                 </h2>
                 <p className={cn("text-zinc-400 mb-5 max-w-md", LEAD)}>
-                  Thirty thousand naira a month, flat. Not a percentage, not per
-                  order. Your customer pays you directly.
+                  From five thousand naira a month, flat. Not a percentage of
+                  your sales, not per order. Your customer pays you directly.
                 </p>
                 <div className="space-y-3 mb-6">
                   {deal.map((item, i) => (

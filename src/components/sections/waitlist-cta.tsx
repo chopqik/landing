@@ -53,8 +53,9 @@ export function WaitlistCTA() {
 
         <p className="text-base md:text-xl text-zinc-400 mb-10 max-w-xl mx-auto leading-relaxed">
           We build your menu, set up your tablet and train your staff. No setup
-          fee, no card details, and no commission on a single sale. If it has
-          not earned its place in your kitchen by then, walk away.
+          fee, no card details, and your subscription is flat — not a
+          percentage of your sales, not per order. If it has not earned its
+          place in your kitchen by then, walk away.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -77,7 +78,7 @@ export function WaitlistCTA() {
         </div>
 
         <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">
-          ₦30,000 a month after the trial · Live in Benin City
+          Plans from ₦5,000 a month after the trial · Live in Benin City
         </p>
       </div>
     </section>

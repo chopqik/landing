@@ -86,7 +86,8 @@ export function Footer() {
             <p className="text-zinc-400 leading-relaxed text-sm">
               The operating system for restaurants, bars and hotels in Nigeria.
               Orders, stock, staff, reservations and your daily books on one
-              screen. One flat monthly fee, no commission on any sale.
+              screen. Flat monthly plans from ₦5,000, with no commission on
+              your sales.
             </p>
             <div className="flex items-center gap-3 pt-1">
               <SocialIcon
