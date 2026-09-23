@@ -19,6 +19,15 @@
 //     and rank worse than one page would.
 //   - Type scale is imported from the same constants the homepage
 //     uses. Do not redefine sizes here.
+//   - The price line below renders on all four routes. It is the
+//     only price in this file — if tiers change, this is the one
+//     place to change them. Each page's own closingBody repeats
+//     them, so the two must agree. (September 2026: ₦20,000 was
+//     never live here; the stale figure was a single ₦30,000.)
+//   - Commission language is scoped to the SUBSCRIPTION, not to
+//     every future ChopQik service. Delivery is Phase 4 and will
+//     carry its own fee, so "no commission, ever" is a promise
+//     this company cannot keep.
 // =============================================================
 
 import Link from "next/link";
@@ -99,8 +108,8 @@ export function VerticalPage({ content }: { content: VerticalContent }) {
             </a>
           </div>
           <p className="mt-5 text-[12px] text-zinc-500">
-            Sixty days free · ₦30,000 a month after that · No commission on a
-            single sale
+            Sixty days free · From ₦5,000 a month after that · A flat fee, not
+            a percentage of your sales
           </p>
         </div>
       </section>

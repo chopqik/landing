@@ -28,7 +28,7 @@ const faqs = [
   {
     question: "What does it cost?",
     answer:
-      "Thirty thousand naira a month, flat. It does not change with how much you sell, and there is no commission on any order. The first sixty days are free, and we do not ask for card details to start.",
+      "There are three plans: five thousand naira a month for Lite, fifteen thousand for Standard, and thirty thousand for Premium. Most businesses run on Standard. Whichever you are on, the fee is flat — it does not change with how much you sell, and there is no commission on your orders. The first sixty days are free, and we do not ask for card details to start.",
   },
   {
     question: "Is ChopQik a delivery app?",

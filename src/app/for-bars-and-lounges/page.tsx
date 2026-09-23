@@ -4,7 +4,7 @@ import { VerticalPage, type VerticalContent } from "@/components/sections/vertic
 export const metadata: Metadata = {
   title: "Bar & Lounge Stock Control Software Nigeria | ChopQik",
   description:
-    "Bottle-level stock control, tab management and a nightly cash position for bars and lounges in Nigeria. See what came in, what sold and what is missing. Flat monthly fee, no commission.",
+    "Bottle-level stock control, tab management and a nightly cash position for bars and lounges in Nigeria. See what came in, what sold and what is missing. Flat monthly fee, no commission on your sales.",
   keywords: [
     "Bar stock control Nigeria",
     "Lounge management software Nigeria",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bar & Lounge Stock Control Software | ChopQik",
     description:
-      "Bottle-level stock, open tabs and a nightly cash position. Flat monthly fee, no commission on a single sale.",
+      "Bottle-level stock, open tabs and a nightly cash position. Flat monthly fee, no commission on your sales.",
     url: "https://www.chopqik.com/for-bars-and-lounges",
   },
 };
@@ -76,7 +76,7 @@ const content: VerticalContent = {
 
   closingHeading: "Run it for two months. Pay nothing.",
   closingBody:
-    "We load your drinks list, set up the tablet you already own, and train your staff in about an hour. Sixty days free, then ₦30,000 a month, flat. No commission on a single sale, and your customer pays you directly — ChopQik never holds your money.",
+    "We load your drinks list, set up the tablet you already own, and train your staff in about an hour. Sixty days free, then from ₦5,000 a month, and most bars run on Standard at ₦15,000. Your subscription is flat — not a percentage of your sales, not per order — and your customer pays you directly, so ChopQik never holds your money.",
 };
 
 export default function ForBarsAndLoungesPage() {

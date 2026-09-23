@@ -4,7 +4,7 @@ import { VerticalPage, type VerticalContent } from "@/components/sections/vertic
 export const metadata: Metadata = {
   title: "Hotel Restaurant & Room Service Software Nigeria | ChopQik",
   description:
-    "Run your hotel restaurant, bar and room service on one screen. Orders reach the kitchen, unpaid bills stay in front of reception until they are settled. Flat monthly fee, no commission.",
+    "Run your hotel restaurant, bar and room service on one screen. Orders reach the kitchen, unpaid bills stay in front of reception until they are settled. Flat monthly fee, no commission on your sales.",
   keywords: [
     "Hotel restaurant software Nigeria",
     "Room service order system Nigeria",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hotel Restaurant & Room Service Software | ChopQik",
     description:
-      "Orders, kitchen, room service and unpaid bills on one screen. Flat monthly fee, no commission on a single sale.",
+      "Orders, kitchen, room service and unpaid bills on one screen. Flat monthly fee, no commission on your sales.",
     url: "https://www.chopqik.com/for-hotels",
   },
 };
@@ -79,7 +79,7 @@ const content: VerticalContent = {
 
   closingHeading: "Run it for two months. Pay nothing.",
   closingBody:
-    "We build your menu from a photograph, set up the tablet you already own, and train your staff. No setup fee, no card, no commission on a single sale. If it has not earned its place by then, walk away.",
+    "We build your menu from a photograph, set up the tablet you already own, and train your staff. No setup fee, no card, and your subscription is flat — not a percentage of your sales, not per order. If it has not earned its place by then, walk away.",
 };
 
 export default function ForHotelsPage() {
